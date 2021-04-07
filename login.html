@@ -1,18 +1,52 @@
 <html>
 <head>
+    <script src="https://kit.fontawesome.com/f9714cf77e.js" crossorigin="anonymous"></script>
+
     <style>
 
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #6AB187;
+        }
+        #login-div{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: whitesmoke;
+            padding: 40px;
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.2);    
+        }
+
+        #login-form{
+            display: grid;
+            grid-template-columns: auto;
+            grid-gap: 5px;
+        }
+
+        input[type=text], input[type=password]{
+            background-color: rgba(255, 255, 255, 0.767);
+            border: none;
+            height: 25px;
+        }
     </style>
 </head>
 <div id="login-div">
-    <div id="login-form">
-        <form method="POST" action="assets/php/login.php">
-            <label for="user">Gebruikersnaam / E-mail:</label>
-            <input name="user" type="text">
-            <label for="password">Wachtwoord:</label>
-            <input name="password" type="password">
-            <input name="submit" type="submit">
-            <a href="registreren.html">Klik hier om te registreren</a>
+    <div id="login-form-div">
+        <form method="POST" id="login-form" action="assets/php/login.php">
+            <div class="login-form-input">
+                <label for="user">Gebruikersnaam:</label><br>
+                <i class="far fa-address-card"></i><input name="user" type="text">
+            </div>
+            <div class="login-form-input">
+                <label for="password">Wachtwoord:</label><br>
+                <i class="fas fa-key"></i><input name="password" type="password">
+            </div>
+
+            <input name="submit" type="submit" value="Login"><br>
+            <a  style="font-size: 15px;" href="registreren.html">Klik hier om te registreren</a>
         </form>
     </div>
 </div>
