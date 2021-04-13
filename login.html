@@ -1,54 +1,92 @@
 <html>
 <head>
-    <script src="https://kit.fontawesome.com/f9714cf77e.js" crossorigin="anonymous"></script>
+    <title>La Rustique</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
         
         body {
-            font-family: 'Playfair Display', serif;
             background-color: #6AB187;
-        }
-        #login-div{
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: whitesmoke;
-            padding: 40px;
-            box-shadow: 2px 2px 3px rgba(0,0,0,0.2);    
+            margin-top: 50px;
         }
 
+        #login-form, #login-form *{
+            box-sizing: border-box;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+        
         #login-form{
-            display: grid;
-            grid-template-columns: auto;
-            grid-gap: 5px;
+            overflow: hidden;
+            max-width: 350px;
+            margin: 0 auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.20);
         }
 
-        input[type=text], input[type=password]{
-            background-color: rgba(255, 255, 255, 0.767);
-            border: none;
-            height: 25px;
+        #login-form__logo-container{
+            background-color: rgba(0,0,0,0.25);
+            font-weight: bold;
+            text-align: center;
+            padding: 25px;
+            display: block;
+            margin: 0 auto;
         }
+
+        #login-form__content{
+            text-align: center;
+            padding: 25px;
+            background: #eeeeee;
+        }
+
+        #login-form__content--header{
+            padding: 15px;
+            text-align: center;
+        }
+        .login-form__input{
+            padding: 15px;
+            margin-bottom: 10px;
+            width: 100%;
+            border: 2px solid #dddddd;
+            outline: none;
+            border-radius: 5px;
+            background: #ffffff;
+            transition: border-color 0.2s;
+        }
+
+        .login-form__input:focus {
+            border-color: #6AB187;
+        }
+
+        .login-form__button{
+            padding: 15px;
+            font-weight: bold;
+            width: 100%;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #ffffff;
+            background: #6AB187;
+        }
+
+
+
     </style>
 </head>
-<div id="login-div">
-    <div id="login-form-div">
-        <form method="POST" id="login-form" action="assets/php/login.php">
-            <div class="login-form-input">
-                <label for="user">Gebruikersnaam:</label><br>
-                <i class="far fa-address-card"></i><input name="user" type="text">
-            </div>
-            <div class="login-form-input">
-                <label for="password">Wachtwoord:</label><br>
-                <i class="fas fa-key"></i><input name="password" type="password">
+    <form method="POST" id="login-form" action="assets/php/login.php">
+        <div id="login-form__logo-container">
+            Logo placeholder
+        </div>
+        <div id="login-form__content">
+            <div id="login-form__content--header">
+                Login
             </div>
 
-            <input name="submit" type="submit" value="Login"><br>
-            <a  style="font-size: 15px;" href="registreren.html">Klik hier om te registreren</a>
-        </form>
-    </div>
-</div>
+            <input class="login-form__input" name="f_username" placeholder="Gebruikersnaam.." type="text">
+            <input class="login-form__input" name="f_username" placeholder="Wachtwoord.." type="text">
+            <input class="login-form__button" name="f_submit" value="Inloggen" type="submit">
+        </div>
+    </form>
 </html>
 
