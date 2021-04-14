@@ -1,7 +1,7 @@
 <?php
     require("db/database_connectie.php");
-    if(isset($_POST["submit"])){
-        if (CheckLogin($_POST["user"], $_POST["password"])){
+    if(isset($_POST["f_submit"])){
+        if (CheckLogin($_POST["f_username"], $_POST["f_password"])){
             session_start();
             $_SESSION["Ingelogd"] = true;
             header("Location: ../../dashboard/home.php");
@@ -17,6 +17,7 @@
 
         $statement -> execute();
         $pass_hash = $statement->get_result()->fetch_assoc()["wachtwoord"];
+
 
         $test = password_verify($password, $pass_hash);
 

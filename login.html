@@ -67,8 +67,18 @@
             cursor: pointer;
             color: #ffffff;
             background: #6AB187;
+            transition: background-color 0.2s;
+            margin-bottom: 10px;
         }
 
+        .login-form__button:hover{
+            background: #6ab188c9;
+        }
+
+        .login-form__link{
+            color: #6AB187;
+            font-size: 15px;
+        }
 
 
     </style>
@@ -83,8 +93,9 @@
             </div>
 
             <input class="login-form__input" name="f_username" placeholder="Gebruikersnaam.." type="text">
-            <input class="login-form__input" name="f_username" placeholder="Wachtwoord.." type="text">
+            <input class="login-form__input" name="f_password" placeholder="Wachtwoord.." type="password">
             <input class="login-form__button" name="f_submit" value="Inloggen" type="submit">
+            <a class="login-form__link" href="registreren.html">Klik hier om te registreren..</a>
         </div>
     </form>
 </html>

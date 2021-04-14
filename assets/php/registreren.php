@@ -10,11 +10,13 @@
     function RegisterAccount($user, $email, $password){
         $connection = OpenConnection();
         $hash_pw = password_hash($password, PASSWORD_DEFAULT);
-        $statement = $connection -> prepare("INSERT INTO `accountgegevens` (`gebruikersnaam`, `email`, `wachtwoord`) VALUES(?,?,?)");
-        $statement -> bind_param("sss", $user, $email, $hash_pw);
+        $rechten = json_encode(array("rollen" => ""));
+        $statement = $connection -> prepare("INSERT INTO `accountgegevens` (`gebruikersnaam`, `email`, `wachtwoord`, `rechten`) VALUES(?,?,?,?)");
+        $statement -> bind_param("ssss", $user, $email, $hash_pw, $rechten);
 
 
         $result = $statement -> execute();
+        exit($connection->error);
         CloseConnection($connection);
         return $result;
         
