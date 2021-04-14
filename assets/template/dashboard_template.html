@@ -1,4 +1,58 @@
 <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/f9714cf77e.js" crossorigin="anonymous"></script>
+        <style>
+            body{
+                margin: 0;
+                background-color: #ffffff;
+            }
+            body *{
+                font-family: sans-serif;
+            }
+
+            #nav-container{
+                height: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 300px;
+                border: 2px solid #dddddd;
+                outline: none;
+            }
+
+            #nav-menu__redirect{
+                margin-top: 50px;
+            }
+            .nav-menu__redirect--item {
+                display:block;
+                transition: background-color 0.2s;
+                padding: 5px;
+                margin: 30px;
+            }
+            .nav-menu__redirect--item:hover{background-color:rgba(106,177,135, 0.6)}
+
+            .nav-menu__redirect--item a {
+                font-size: 1rem;
+                text-decoration: none; 
+                color:#333333; 
+                font-weight: bold;
+            }
+
+            
+
+            #nav-menu__logo{
+                padding: 5px;
+            }
+
+            #main{
+                padding-left: 13vw;
+                background-color: #F1F1F1;
+            }
+
+
+        </style>
+    </head>
     <body>
         <div id="nav-container">
             <div id="nav-menu__logo">
@@ -7,7 +61,7 @@
             <div id="nav-menu__redirect">
                 <div class="nav-menu__redirect--item">
                     <a href="home.php">
-                        <i class="fas fa-home"></i><span class="nav-menu__redirect--item--content">Home</span>
+                        <i class="fas fa-home fa-fw"></i><span class="nav-menu__redirect--item--content">Home</span>
                     </a>
                 </div>
                 <div class="nav-menu__redirect--item">
@@ -27,86 +81,5 @@
                 </div>
             </div>
         </div>
-
     </body>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://kit.fontawesome.com/f9714cf77e.js" crossorigin="anonymous"></script>
-        <style>
-            body{
-                margin: 0;
-                background-color: #ffffff;
-            }
-            body *{
-                font-family: sans-serif;
-            }
-
-            #nav-container{
-                height: 100%;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 35px;
-                border: 2px solid #dddddd;
-                outline: none;
-                transition: width 0.5s ease;
-            }
-
-            #nav-container:hover{
-                width: 250px;
-
-            }
-
-            #nav-menu__redirect{
-                margin-top: 5vh;
-            }
-            .nav-menu__redirect--item {
-                display:block;
-                transition: background-color 0.2s;
-                padding: 5px;
-            }
-            .nav-menu__redirect--item a {text-decoration: none; color:#191919;}
-            .nav-menu__redirect--item:hover{
-                background-color:rgba(106,177,135, 0.6)
-            }
-            
-
-            #nav-menu__logo{
-                padding: 5px;
-            }
-
-            #main{
-                padding-left: 13vw;
-                background-color: #F1F1F1;
-            }
-
-
-        </style>
-            <script>
-                const nav = document.getElementById("nav-container");
-                const navText = document.getElementsByClassName("nav-menu__redirect--item--content")
-                if(nav && navText){
-                    for (i = 0; i < navText.length; i++) {
-                                navText[i].style.visibility = "hidden";
-                    }
-                    nav.addEventListener("resize", hideContent())
-                }
-                
-                function hideContent(){
-                    console.log("test")
-                    if (nav.clientWidth < 250) {
-                            console.log(nav.clientWidth);
-                            for (i = 0; i < navText.length; i++) {
-                                navText[i].style.visibility = "hidden";
-                            }
-                        else {
-                            for (i = 0; i < navText.length; i++) {
-                                navText[i].style.visibility = "visible";
-                            }
-                        }
-                    
-                }
-            </script>
-    </head>
-
 </html>
