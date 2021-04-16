@@ -17,29 +17,31 @@
                 top: 0;
                 left: 0;
                 width: 300px;
-                border: 2px solid #dddddd;
-                outline: none;
+                background-color: rgb(99, 168, 128);
             }
 
             #nav-menu__redirect{
                 margin-top: 50px;
             }
-            .nav-menu__redirect--item {
-                display:block;
-                transition: background-color 0.2s;
-                padding: 5px;
-                margin: 30px;
-            }
-            .nav-menu__redirect--item:hover{background-color:rgba(106,177,135, 0.6)}
+            
+            .nav-menu__redirect__item a:hover {background-color: #F1F1F1;}
+            .nav-menu__redirect__item a:hover .nav-menu__redirect__item__content{color: #444444;}
 
-            .nav-menu__redirect--item a {
+            .nav-menu__redirect__item a {
                 font-size: 1rem;
                 text-decoration: none; 
-                color:#333333; 
+                color:#F1F1F1; 
                 font-weight: bold;
+                display:block;
+                transition: background-color 0.2s;
+                padding: 30px;
+                background-color: inherit;
+                cursor: pointer;
             }
 
-            
+            .nav-menu__redirect__item span {
+                margin-left: 2em;
+            }
 
             #nav-menu__logo{
                 padding: 5px;
@@ -50,33 +52,33 @@
                 background-color: #F1F1F1;
             }
 
-
         </style>
     </head>
     <body>
         <div id="nav-container">
             <div id="nav-menu__logo">
-
+                
             </div>
             <div id="nav-menu__redirect">
-                <div class="nav-menu__redirect--item">
+                <div class="nav-menu__redirect__item">
                     <a href="home.php">
-                        <i class="fas fa-home fa-fw"></i><span class="nav-menu__redirect--item--content">Home</span>
+                        <div class="nav-menu__redirect__item__content"><i class="fas fa-home fa-fw"></i><span>Home</span></div>
                     </a>
                 </div>
-                <div class="nav-menu__redirect--item">
+                <div class="nav-menu__redirect__item">
                     <a href="reserveringen.php">
-                        <i class="far fa-calendar-minus"></i><span class="nav-menu__redirect--item--content">Reserveringen</span>
+                        <div class="nav-menu__redirect__item__content"><i class="far fa-calendar-minus"></i><span>Reserveringen</span></div>
                     </a>
                 </div>
-                <div class="nav-menu__redirect--item">
+                <div class="nav-menu__redirect__item">
+
                     <a href="accounts.php">
-                        <i class="far fa-user"></i><span class="nav-menu__redirect--item--content">Accounts</span>
+                        <div class="nav-menu__redirect__item__content"><i class="far fa-user"></i><span>Accounts</span></div>
                     </a>
                 </div>
-                <div class="nav-menu__redirect--item">
+                <div class="nav-menu__redirect__item">
                     <a href="omzet.php">
-                        <i class="far fa-chart-bar"></i><span class="nav-menu__redirect--item--content">Omzet en Statistieken</span>
+                        <div class="nav-menu__redirect__item__content"><i class="far fa-chart-bar"></i><span>Omzet en Statistieken</span></div>
                     </a>
                 </div>
             </div>
