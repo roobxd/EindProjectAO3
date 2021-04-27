@@ -12,7 +12,7 @@
     function CheckLogin($user, $password){
         $connection = OpenConnection();
 
-        $statement = $connection -> prepare("SELECT `wachtwoord`, `rechten` FROM accountgegevens WHERE `gebruikersnaam` = ? OR `email` = ?");
+        $statement = $connection -> prepare("SELECT `wachtwoord` FROM accountgegevens WHERE `gebruikersnaam` = ? OR `email` = ?");
         $statement -> bind_param("ss", $user, $user);
 
         $statement -> execute();
