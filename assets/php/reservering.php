@@ -21,6 +21,14 @@
         public $tent_groot;
         public $auto;
 
+
+        const PRIJZEN = array(
+            "kinderen4_12" => 4,
+            "" => ""
+
+        ); 
+
+
         function __construct(Array $prop=array()){
             foreach($prop as $key => $value){
                 $this->{$key} = $value;
@@ -39,6 +47,13 @@
             );
             return $result;
         } 
+
+
+        function calculate_price(){
+            
+        }
+
+
     }
 
 
