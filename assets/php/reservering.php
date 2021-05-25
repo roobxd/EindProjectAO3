@@ -9,6 +9,7 @@
         public $achternaam;
         public $begin_datum;
         public $eind_datum;
+        public $volwassene;
         public $kinderen4_12;
         public $huisdier;
         public $elektriciteit;
@@ -21,18 +22,11 @@
         public $tent_groot;
         public $auto;
 
-
-        const PRIJZEN = array(
-            "kinderen4_12" => 4,
-            "" => ""
-
-        ); 
-
-
         function __construct(Array $prop=array()){
             foreach($prop as $key => $value){
                 $this->{$key} = $value;
             }
+
         }
 
 
@@ -50,7 +44,35 @@
 
 
         function calculate_price(){
-            
+            $prijzen = array(
+                "volwassene" => array("q", 5), 
+                "kinderen4_12" => array("q", 4),
+                "huisdier" => array("b", 2),
+                "elektriciteit" => array("b", 2),
+                "douche" => array("q", 0.50),
+                "wasmachine" => array("b", 6),
+                "wasdroger" => array("b", 4),
+                "caravan_klein" => array("b", 2) ,
+                "caravan_groot" => array("b", 4),
+                "tent_klein" => array("b", 3),
+                "tent_groot" => array("b", 5),
+                "auto" => array("b", 3)
+            ); 
+            $price = 0;
+            $begin = new DateTime($this->begin_datum);
+            $end = new DateTime($this->eind_datum);
+            $days = intval($begin->diff($end)->format("%R%a"));
+            foreach($this as $key => $value){
+                if(array_key_exists($key, $prijzen)){
+                    if($prijzen[$key][0] == "q"){
+                        $price += ($prijzen[$key][1] * $value) * $days;
+                    }
+                    else{
+                        $price += $prijzen[$key][1] * $days;
+                    }
+                }
+            }
+            return $price;
         }
 
 

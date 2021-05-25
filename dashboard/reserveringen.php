@@ -68,7 +68,8 @@
                                 foreach($reservering->return_small_result() as $result){
                                     echo "<td>".$result."</td>";
                                 }
-                                echo "<td> <input type='button'><input type='button'> </td>";
+                                echo "<td>". $reservering->calculate_price() ."</td>";
+                                echo "<td> <input type='button' value='Meer Informatie'><input type='button' value='Verwijderen'><input type='button' value='Aanpassen'></td>";
                                 echo "</tr>";
                             }
                         ?>
