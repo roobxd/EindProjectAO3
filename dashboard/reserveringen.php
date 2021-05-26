@@ -20,16 +20,23 @@
         #reserveringen-container{
             background-color: #ffffff;
             height: 70%;
-            width: 60%;
+            max-width: 70%;
             padding: 15px;
             margin-left: 15%;
             box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
 
         }
 
+        #reserveringen-container__reserveringen-table{
+    
+        }
+
+
         #reserveringen-container__reserveringen-table table{
             border-collapse: collapse;
-            width: 100%;
+            min-width: inherit;
+            max-height: inherit;
+            box-sizing: border-box;
         }
 
         #reserveringen-container__reserveringen-table th{
@@ -42,6 +49,11 @@
         #reserveringen-container__reserveringen-table td{
             padding: 10px;
             text-align: left;
+            word-wrap: break-word;
+        }
+
+        #reserveringen-container__reserveringen-table tr:nth-child(odd){
+            background-color: #f5f5f5;
         }
 
 

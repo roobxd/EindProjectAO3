@@ -81,7 +81,7 @@
 
     function returnReserveringen(){
         $connection = OpenConnection();
-        $result = $connection->query("SELECT `plaatsnummer`, `klanten`.`voornaam`, `klanten`.`tussenvoegsel`, `klanten`.`achternaam`, `begin_datum`, `eind_datum`, `kinderen4_12`, `huisdier`, `elektriciteit`, `douche`, `wasmachine`, `wasdroger`, `caravan_klein`, `caravan_groot`, `tent_klein`, `tent_groot`, `auto` FROM `reserveringen`, `klanten`  WHERE `klanten`.`klant_id` = `reserveringen`.`klant_id`");
+        $result = $connection->query("SELECT `plaatsnummer`, `klanten`.`voornaam`, `klanten`.`tussenvoegsel`, `klanten`.`achternaam`, `begin_datum`, `eind_datum`, `volwassene`, `kinderen4_12`, `huisdier`, `elektriciteit`, `douche`, `wasmachine`, `wasdroger`, `caravan_klein`, `caravan_groot`, `tent_klein`, `tent_groot`, `auto` FROM `reserveringen`, `klanten`  WHERE `klanten`.`klant_id` = `reserveringen`.`klant_id`");
         $reservering_array = array();
         while ( $arr = $result->fetch_assoc() ){
             array_push($reservering_array, new Reservering($arr)); 
