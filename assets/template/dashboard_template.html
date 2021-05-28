@@ -3,6 +3,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/f9714cf77e.js" crossorigin="anonymous"></script>
         <style>
+
+            :root {
+                --accent-green: RGB(136, 176, 75);
+                --main-dark: #444444;
+                --main-light: #F1F1F1;
+                --main-light-gray: #F0F0F0;
+            }
+
             body{
                 margin: 0;
                 background-color: #ffffff;
@@ -12,21 +20,20 @@
             #nav-container{
                 height: 95%;
                 position: fixed;
-                top: 5%;
                 left: 0;
                 width: 15%;
-                background-color: rgb(99, 168, 128);
+                background-color: var(--main-light);
             }
 
             #nav-menu__redirect{margin-top: 50px;}
             
-            .nav-menu__redirect__item a:hover {background-color: #F1F1F1;}
-            .nav-menu__redirect__item a:hover .nav-menu__redirect__item__content{color: #444444;}
+            .nav-menu__redirect__item a:hover {background-color: var(--main-light);}
+            .nav-menu__redirect__item a:hover .nav-menu__redirect__item__content{color: var(--main-dark);}
 
             .nav-menu__redirect__item a {
                 font-size: 1rem;
                 text-decoration: none; 
-                color:#F1F1F1; 
+                color: var(--main-dark); 
                 font-weight: bold;
                 display:block;
                 transition: background-color 0.2s;
@@ -40,8 +47,8 @@
             #nav-menu__logo{padding: 5px;}
 
             #main{
-                padding-left: 13vw;
-                background-color: #F1F1F1;
+                padding-left: 15%;
+                background-color: var(--main-light-gray);
             }
 
             header{
