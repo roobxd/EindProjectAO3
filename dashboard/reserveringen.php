@@ -1,34 +1,25 @@
 <?php
     require("../assets/template/dashboard_template.html");
-    require("../assets/php/reservering.php");
+    require("../assets/php/reservering_sql.php");
 
     
 ?>
 
 <html>
     <style>
-        body {
-
-        }
-
         #main{
             width: auto;
             height: 100%;
-            background-color: #f5f5f5;
+            background-color: var(--main-background);
         }
 
         #reserveringen-container{
-            background-color: #ffffff;
+            background-color: var(--main-background);
             height: 70%;
             max-width: 70%;
             padding: 15px;
             margin-left: 15%;
-            box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
 
-        }
-
-        #reserveringen-container__reserveringen-table{
-    
         }
 
 
@@ -37,12 +28,16 @@
             min-width: inherit;
             max-height: inherit;
             box-sizing: border-box;
+            background-color: var(--main-light);
+            box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
+            border-radius: 15px;
+
         }
 
         #reserveringen-container__reserveringen-table th{
             padding: 10px;
             text-align: left;
-            background-color: rgb(99, 168, 128);
+            background-color: var(--accent-green);
             color: #ffffff;
         }
 
@@ -66,7 +61,6 @@
             <div id="reserveringen-container">
                 <div id="reserveringen-container__options">
                     <div id="reserveringen-container__options__content">
-
                         <input type="text">
                     </div>
                 </div>

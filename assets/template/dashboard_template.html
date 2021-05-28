@@ -3,30 +3,46 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/f9714cf77e.js" crossorigin="anonymous"></script>
         <style>
+
+            :root {
+                --accent-green: #72c975;
+                --main-dark: #444444;
+                --main-light: #ffffff;
+                --main-background: #e2e2e2;
+                --main-light-gray: #f3f3f3;
+            }
+
             body{
                 margin: 0;
-                background-color: #ffffff;
+                background-color: var(--main-background);
             }
+
             body *{font-family: sans-serif;}
 
             #nav-container{
-                height: 95%;
+                height: 100%;
                 position: fixed;
-                top: 5%;
                 left: 0;
                 width: 15%;
-                background-color: rgb(99, 168, 128);
+                background-color: var(--main-light);
+            }
+
+            #nav-menu__logo{
+                width: 100%;
+                height: 5%;
+                padding: 0;
+                background-color: var(--accent-green);
             }
 
             #nav-menu__redirect{margin-top: 50px;}
             
-            .nav-menu__redirect__item a:hover {background-color: #F1F1F1;}
-            .nav-menu__redirect__item a:hover .nav-menu__redirect__item__content{color: #444444;}
+            .nav-menu__redirect__item a:hover {background-color: rgba(76, 175, 80, 0.2);}
+            .nav-menu__redirect__item a:hover .nav-menu__redirect__item__content{color: var(--accent-green);}
 
             .nav-menu__redirect__item a {
                 font-size: 1rem;
                 text-decoration: none; 
-                color:#F1F1F1; 
+                color: var(--main-dark); 
                 font-weight: bold;
                 display:block;
                 transition: background-color 0.2s;
@@ -39,25 +55,13 @@
 
             #nav-menu__logo{padding: 5px;}
 
-            #main{
-                padding-left: 13vw;
-                background-color: #F1F1F1;
-            }
-
-            header{
-                width: 100%;
-                height: 5%;
-                background-color: rgba(86, 146, 111, 0.836)
-            }
 
         </style>
     </head>
     <body>
-        <header></header>
-        
         <div id="nav-container">
             <div id="nav-menu__logo">
-                
+
             </div>
             <div id="nav-menu__redirect">
                 <div class="nav-menu__redirect__item">

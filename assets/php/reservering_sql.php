@@ -65,10 +65,10 @@
             foreach($this as $key => $value){
                 if(array_key_exists($key, $prijzen)){
                     if($prijzen[$key][0] == "q"){
-                        $price += ($prijzen[$key][1] * $value) * $days;
-                    }
+                        $price += ($prijzen[$key][1] * $value) *
                     else{
                         $price += $prijzen[$key][1] * $days;
+                    } $days;
                     }
                 }
             }
