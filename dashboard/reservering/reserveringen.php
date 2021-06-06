@@ -1,6 +1,6 @@
 <?php
-    require("../assets/template/dashboard_template.html");
-    require("../assets/php/reservering_sql.php");
+    require("../../assets/template/dashboard_template.html");
+    require("../../assets/php/reservering_sql.php");
 
     
 ?>
@@ -62,6 +62,7 @@
                 <div id="reserveringen-container__options">
                     <div id="reserveringen-container__options__content">
                         <input type="text">
+                        <input type="button" value="Aanmaken" onclick="location.href='reservering_aanmaken.php'">
                     </div>
                 </div>
                 <div id="reserveringen-container__reserveringen-table">

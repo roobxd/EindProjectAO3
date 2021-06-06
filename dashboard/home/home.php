@@ -1,5 +1,5 @@
 <?php
-    require("../assets/template/dashboard_template.html");
+    require("../../assets/template/dashboard_template.html");
 ?>
 
 <html>

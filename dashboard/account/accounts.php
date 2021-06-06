@@ -1,8 +1,6 @@
 <?php
-    require("../assets/template/dashboard_template.html");
-    require("../assets/php/account_sql.php");
-
-    
+    require("../../assets/template/dashboard_template.html");
+    require("../../assets/php/account_sql.php");
 ?>
 
 <html>
@@ -53,6 +51,14 @@
 
 
     </style>
+
+    <script>
+
+
+
+    </script>
+
+
     <head>
 
     </head>
@@ -62,6 +68,7 @@
                 <div id="reserveringen-container__options">
                     <div id="reserveringen-container__options__content">
                         <input type="text">
+                        <input type="button" value="Aanmaken" onclick="location.href='account_aanmaken.php'">
                     </div>
                 </div>
                 <div id="reserveringen-container__reserveringen-table">

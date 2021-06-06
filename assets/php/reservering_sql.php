@@ -42,7 +42,6 @@
             return $result;
         } 
 
-
         function calculate_price(){
             $prijzen = array(
                 "volwassene" => array("q", 5), 
@@ -65,17 +64,45 @@
             foreach($this as $key => $value){
                 if(array_key_exists($key, $prijzen)){
                     if($prijzen[$key][0] == "q"){
-                        $price += ($prijzen[$key][1] * $value) *
-                    else{
+                        $price += ($prijzen[$key][1] * $value) * $days;
+                    }
+                    else {
                         $price += $prijzen[$key][1] * $days;
-                    } $days;
                     }
                 }
             }
             return $price;
         }
 
+       
+        
+    }
 
+
+    function reservering_remove($reservingen){
+        $plaatsnummers = implode("," $reserveringen);
+        
+        $connection = OpenConnection();
+        $prep_query = $connection->prepare("DELETE FROM `reserveringen` WHERE `plaatsnummer` in (?)");
+        $prep_query->bind_param("s", $plaatsnummers);
+        $prep_query->execute();
+        CloseConnection($connection);
+    }
+
+    function reservering_add($reservering){
+
+        $connection = OpenConnection();
+        $connection->begin_transaction();
+        
+        $prep_query1 = $connection->prepare("INSERT INTO `klanten` (`voornaam`, `tussenvoegsel`, `achternaam`) VALUES(?,?,?)");
+        $prep_query2 = $connection->prepare("INSERT INTO `reserveringen` (`klant_id`, `plaatsnummer`, `begin_datum`, `eind_datum`, `volwassene`, `kinderen4_12`, `huisdier`, `elektriciteit`, `douche`, `wasmachine`, `wasdroger`, `caravan_klein`, `caravan_groot`, `tent_klein`, `tent_groot`, `auto`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $prep_query1->bind_param("sss", $reservering->voornaam, $reservering->tussenvoegsel, $reservering->achternaam);
+        $prep_query1->execute();
+
+        $prep_query2->bind_param("iissiiiiiiiiiiii", $prep_query1->insert_id(), $reservering->plaatsnummer, $reservering->begin_datum, $reservering->eind_datum, $reservering->volwassene, $reservering->kinderen4_12, $reservering->huisdier, $reservering->elektriciteit, $reservering->douche, $reservering->wasmachine, $reservering->wasdroger, $reservering->caravan_klein, $reservering->caravan_groot, $reservering->tent_klein, $reservering->tent_groot, $reservering->auto);
+
+        CloseConnection($connection);
     }
 
 
