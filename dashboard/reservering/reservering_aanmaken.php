@@ -1,6 +1,7 @@
 <?php
     require("../../assets/template/dashboard_template.html");
     require("../../assets/php/reservering_sql.php");
+
 ?>
 
 
@@ -30,53 +31,49 @@
 <body>
     <div id="main">
         <div id="reservering-form">
-            <form>
+            <form action="reservering_toevoegen.php" method="POST">
                 Voornaam
-                <p><input type="text"></p>
+                <p><input required name="voornaam" type="text"></p>
                 Tussenvoegsel
-                <p><input type="text"></p>
+                <p><input name="tussenvoegsel" type="text"></p>
                 Achternaam
-                <p><input type="text"></p>
+                <p><input required name="achternaam" type="text"></p>
 
                 Plaatsnummer
-                <p><input type="number"></p>
+                <p><input required name="plaatsnummer" type="number"></p>
                 Begin Datum
-                <p><input type="datetime-local">
+                <p><input required name="begin_datum" type="datetime-local">
                 Eind Datum
-                <input type="datetime-local"></p>
+                <input required name="eind_datum" type="datetime-local"></p>
 
                 Volwassene
-                <p><input type="number"></p>
+                <p><input required name="volwassene" type="number"></p>
                 Kinderen van 4 tot 12 jaar
-                <p><input type="number"></p>
+                <p><input required name="kinderen4_12" type="number"></p>
 
                 Huisdier?
-                <p><input type="checkbox"></p>
-                Elektriciteit?
-                <p><input type="checkbox"></p>
+                <p><input name="huisdier" value=1 type="checkbox"> <input type="hidden" name="huisdier" value=0></p>
 
                 Douche munten
-                <p><input type="number"></p>
+                <p><input name="douche" type="number"></p>
 
                 Wasmachine?
-                <p><input type="checkbox"></p>
+                <p><input name="wasmachine" value=1 type="checkbox"><input type="hidden" name="wasmachine" value=0></p>
                 Wasdroger?
-                <p><input type="checkbox"></p>
+                <p><input name="wasdroger" value=1 type="checkbox"><input type="hidden" name="wasdroger" value=0></p>
 
+                Verblijf
                 <p>
-                Caravan (klein)
-                <input type="checkbox">
-                Caravan (groot)
-                <input type="checkbox">
-                Tent (klein)
-                <input type="checkbox">
-                Tent (groot)
-                <input type="checkbox">
+                <select name="verblijf" >
+                    <option selected value=1>Caravan</option>
+                    <option value=0>Tent</option>
+                </select>
                 </p>
 
+
                 Auto?
-                <p><input type="checkbox"></p>
-                <p><input type="submit"></p>
+                <p><input name="auto" value=1 type="checkbox"><input type="hidden" name="auto" value=0></p>
+                <p><input name="toevoegen" type="submit"></p>
             </form>
         </div>
     </div>

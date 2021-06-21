@@ -1,10 +1,8 @@
+
 <?php
     require("../../assets/template/dashboard_template.html");
     require("../../assets/php/reservering_sql.php");
-
-    
-?>
-
+?> 
 <html>
     <style>
         #main{
@@ -22,6 +20,14 @@
 
         }
 
+        #reserveringen-container__options__content{
+            background: var(--main-light);
+            box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            display: inline-block;
+        }
 
         #reserveringen-container__reserveringen-table table{
             border-collapse: collapse;
@@ -54,7 +60,43 @@
 
     </style>
     <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <script type="text/javascript">
+            $(document).ready(function() {
+                $("#bulk_verwijderen").on("click", function () {
+                    var checkedReserveringen = $(".reservering_box:checked").map(function(){
+                        return this.value["reservering_id"];
+                    }).get();
+                    var checkedReserveringenJSON = JSON.stringify(checkedReserveringen);
+                    $.ajax({
+                        method: "POST",
+                        url: "reservering_verwijderen.php",
+                        data: {bulk_delete: checkedReserveringenJSON},
+                    }).done(function() {
+                        location.reload();
+                    })
+                });
+                $("#aanmaken").on("click", function () {
+                    location.replace("reservering_aanmaken.php");
+                })
+                $(".verwijderen").on("click", function () {
+                    var reservering_id = JSON.stringify([$(".verwijderen").val()]);
+                    $.ajax({
+                        method: "POST",
+                        url: "reservering_verwijderen.php",
+                        data: {single_delete: reservering_id},
+                    }).done(function() {
+                        location.reload();
+                    })
+
+                })
+                $(".meer_info").on("click", function () {
+                    var reservering_id = $(".meer_info").val();
+                    location.replace("reservering_meerinfo.php?reservering_id="+reservering_id);
+                })
+            });
+    </script> 
     </head>
     <body>
         <div id="main">
@@ -62,21 +104,24 @@
                 <div id="reserveringen-container__options">
                     <div id="reserveringen-container__options__content">
                         <input type="text">
-                        <input type="button" value="Aanmaken" onclick="location.href='reservering_aanmaken.php'">
+                        <button id="aanmaken">Aanmaken</button>
+                        <button id="bulk_verwijderen">Verwijderen</button>
                     </div>
                 </div>
                 <div id="reserveringen-container__reserveringen-table">
-                    <table>
+                    <table id="reservering-table">
                         <tr><th></th><th>#</th><th>Voornaam</th><th>Tussenvoegsel</th><th>Achternaam</th><th>Begin Datum</th><th>Eind Datum</th><th>Eindbedrag</th><th>Acties</th></tr>
                         <?php
                             foreach(returnReserveringen() as $reservering){
                                 echo "<tr>";
-                                echo "<td> <input type='checkbox'> </td>";
+                                echo "<td> <input type='checkbox' value=".$reservering->reservering_id." class='reservering_box'>  </td>";
                                 foreach($reservering->return_small_result() as $result){
+
                                     echo "<td>".$result."</td>";
+                           
                                 }
-                                echo "<td>". $reservering->calculate_price() ."</td>";
-                                echo "<td> <input type='button' value='Meer Informatie'><input type='button' value='Verwijderen'><input type='button' value='Aanpassen'></td>";
+                                echo "<td>€". $reservering->calculate_price() ."</td>";
+                                echo "<td><button value=".$reservering->reservering_id." class='meer_info'>Meer Info / Aanpassen</button><button value=".$reservering->reservering_id." class='verwijderen'>Verwijderen</button></td>";
                                 echo "</tr>";
                             }
                         ?>
@@ -86,3 +131,4 @@
         </div>
     </body>
 </htm>
+ 

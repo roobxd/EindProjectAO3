@@ -4,7 +4,7 @@
         if (CheckLogin($_POST["f_username"], $_POST["f_password"])){
             session_start();
             $_SESSION["Ingelogd"] = true;
-            header("Location: ../../dashboard/home.php");
+            header("Location: ../../dashboard/home/home.php");
         }
     }
 
