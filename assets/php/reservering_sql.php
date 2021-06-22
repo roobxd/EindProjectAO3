@@ -81,9 +81,9 @@
 
     function selectReservering($reservering_id){
         $connection = OpenConnection();
-        $prep_query = $connection->prepare("SELECT `reserveringen`.`reservering_id`, `reserveringen`.`plaatsnummer`, `plaatsen`.`grootte`, `klanten`.`voornaam`, `klanten`.`tussenvoegsel`, `klanten`.`achternaam`, `reserveringen`.`begin_datum`, `reserveringen`.`eind_datum`, `reserveringen`.`volwassene`, `reserveringen`.`kinderen4_12`, `reserveringen`.`huisdier`, `plaatsen`.`elektriciteit`, `reserveringen`.`douche`, `reserveringen`.`wasmachine`, `reserveringen`.`wasdroger`, `reserveringen`.`verblijf`, `reserveringen`.`auto` FROM `reserveringen`, `klanten`, `plaatsen` WHERE ? IN (`plaatsen`.`plaatsnummer`, `reserveringen`.`plaatsnummer`) AND `klanten`.`klant_id` = `reserveringen`.`klant_id`");
+        $prep_query = $connection->prepare("SELECT `reserveringen`.`reservering_id`, `reserveringen`.`plaatsnummer`, `plaatsen`.`grootte`, `klanten`.`voornaam`, `klanten`.`tussenvoegsel`, `klanten`.`achternaam`, `reserveringen`.`begin_datum`, `reserveringen`.`eind_datum`, `reserveringen`.`volwassene`, `reserveringen`.`kinderen4_12`, `reserveringen`.`huisdier`, `plaatsen`.`elektriciteit`, `reserveringen`.`douche`, `reserveringen`.`wasmachine`, `reserveringen`.`wasdroger`, `reserveringen`.`verblijf`, `reserveringen`.`auto` FROM `reserveringen`, `klanten`, `plaatsen` WHERE `reserveringen`.`reservering_id` = ?  AND `klanten`.`klant_id` = `reserveringen`.`klant_id` AND `plaatsen`.`plaatsnummer` = (SELECT `plaatsnummer` FROM `reserveringen` WHERE `reservering_id` = ?)");
 
-        $prep_query->bind_param("i", $reservering_id);
+        $prep_query->bind_param("ii", $reservering_id, $reservering_id);
         $prep_query->execute();
 
         $result = $prep_query->get_result();
@@ -105,43 +105,51 @@
 
     function addReservering($reservering){
 
+        
+
         $connection = OpenConnection();
-        $connection->begin_transaction();
         
         $prep_query1 = $connection->prepare("INSERT INTO `klanten` (`voornaam`, `tussenvoegsel`, `achternaam`) VALUES(?,?,?)");
-        $prep_query2 = $connection->prepare("INSERT INTO `reserveringen` (`klant_id`, `plaatsnummer`, `begin_datum`, `eind_datum`, `volwassene`, `kinderen4_12`, `huisdier`, `douche`, `wasmachine`, `wasdroger`, `verblijf`, `auto`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
-
-        var_dump($_POST);
+        $prep_query2 = $connection->prepare("INSERT INTO `reserveringen` (`klant_id`, `plaatsnummer`, `begin_datum`, `eind_datum`, `volwassene`, `kinderen4_12`, `huisdier`, `douche`, `wasmachine`, `wasdroger`, `verblijf`, `auto`) VALUES(LAST_INSERT_ID(),?,?,?,?,?,?,?,?,?,?,?)");
 
         $prep_query1->bind_param("sss", $reservering["voornaam"], $reservering["tussenvoegsel"], $reservering["achternaam"]);
         $prep_query1->execute();
 
-        $prep_query2->bind_param("iissiiiiiiii", $connection->insert_id, $reservering["plaatsnummer"], $reservering["begin_datum"], $reservering["eind_datum"], $reservering["volwassene"], $reservering["kinderen4_12"], $reservering["huisdier"], $reservering["douche"], $reservering["wasmachine"], $reservering["wasdroger"], $reservering["verblijf"], $reservering["auto"]);
+        $prep_query2->bind_param("issiiiiiiii", $reservering["plaatsnummer"], $reservering["begin_datum"], $reservering["eind_datum"], $reservering["volwassene"], $reservering["kinderen4_12"], $reservering["huisdier"], $reservering["douche"], $reservering["wasmachine"], $reservering["wasdroger"], $reservering["verblijf"], $reservering["auto"]);
         $prep_query2->execute();
 
-        $connection->commit();
         CloseConnection($connection);
     }
 
     function editReservering($updated_reservering){
+        // Dit is nog steeds onveilig.
+        function create_sql_string(&$val, $key){
+            if(is_numeric($val)){
+                $val = "`".$key."` = ".$val;
+            }
+            else{
+                $val = "`".$key."` = '".$val."'";
+            }
+        }
+
+        $klanten_array = array_slice($updated_reservering, 1,3);
+        $reservering_array = array_diff_assoc($updated_reservering, $klanten_array);
+
+        array_walk($klanten_array, "create_sql_string");
+        array_walk($reservering_array, "create_sql_string");
 
         $connection = OpenConnection();
 
-        $update_array = array();
-        foreach($updated_reservering as $key=>$val) {
-            $update_array[$key] = $key." = ".$val;
-        }
-        exit(implode(", ", $update_array));
-        // $prep_query = $connection->prepare("UPDATE `reserveringen` SET ". implode(",", $update_array) ." WHERE `reservering_id` = ".$updated_reservering["reservering_id"]);
-
-        // $prep_query->bind_param();
-        // $prep_query->execute();
+        $connection->query("UPDATE `reserveringen` SET ". implode(",", $reservering_array) ." WHERE ".$reservering_array["reservering_id"]);
+        $connection->query("UPDATE `klanten` SET ". implode(",", $klanten_array) ." WHERE `klant_id` = (SELECT `klant_id` FROM `reserveringen` WHERE ".$reservering_array["reservering_id"].")");
 
         CloseConnection($connection);
 
 
     }
 
+
+    
     function returnReserveringen(){
         $connection = OpenConnection();
         $result = $connection->query("SELECT `reserveringen`.`reservering_id`, `reserveringen`.`plaatsnummer`, `plaatsen`.`grootte`, `klanten`.`voornaam`, `klanten`.`tussenvoegsel`, `klanten`.`achternaam`, `reserveringen`.`begin_datum`, `reserveringen`.`eind_datum`, `reserveringen`.`volwassene`, `reserveringen`.`kinderen4_12`, `reserveringen`.`huisdier`, `plaatsen`.`elektriciteit`, `reserveringen`.`douche`, `reserveringen`.`wasmachine`, `reserveringen`.`wasdroger`, `reserveringen`.`verblijf`, `reserveringen`.`auto` FROM `reserveringen`, `klanten`, `plaatsen` WHERE `reserveringen`.`plaatsnummer` = `plaatsen`.`plaatsnummer` AND `klanten`.`klant_id` = `reserveringen`.`klant_id`");

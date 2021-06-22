@@ -63,15 +63,15 @@
                 <p><input type="number" name="kinderen4_12" value= <?= $reservering->kinderen4_12 ?>></p>
 
                 Huisdier?
-                <p><input type="checkbox" name="huisdier" value=<?=$reservering->huisdier ?> <?php if($reservering->huisdier == 1){echo "checked='checked'";}?>><input type="hidden" name="huisdier" value=<?php echo ($reservering->huisdier == 1) ? 0 : 1?>></p>
+                <p><input type="checkbox" name="huisdier" value=<?=$reservering->huisdier ?> <?php if($reservering->huisdier == 1){echo "checked='checked'";}?>></p>
 
                 Douche munten
                 <p><input type="number" name="douche" value=<?= $reservering->douche?>></p>
 
                 Wasmachine?
-                <p><input type="checkbox" name="wasmachine" value=<?=$reservering->wasmachine ?> <?php if($reservering->wasmachine == 1){echo "checked='checked'";}?>><input type="hidden" name="wasmachine" value=<?php echo ($reservering->wasmachine == 1) ? 0 : 1?>></p>
+                <p><input type="checkbox" name="wasmachine" value=<?=$reservering->wasmachine ?> <?php if($reservering->wasmachine == 1){echo "checked='checked'";}?>></p>
                 Wasdroger?
-                <p><input type="checkbox" name="wasdroger" value=<?=$reservering->wasdroger ?> <?php if($reservering->wasdroger == 1){echo "checked='checked'";}?>><input type="hidden" name="wasdroger" value=<?php echo ($reservering->wasdroger == 1) ? 0 : 1?>></p>
+                <p><input type="checkbox" name="wasdroger" value=<?=$reservering->wasdroger ?> <?php if($reservering->wasdroger == 1){echo "checked='checked'";}?>></p>
 
                 Verblijf
                 <p>
@@ -82,7 +82,7 @@
                 </p>
 
                 Auto?
-                <p><input type="checkbox" name="auto" value=<?=$reservering->auto ?> <?php if($reservering->auto = 1){echo "checked";}?>><input type="hidden" name="auto" value=<?php echo ($reservering->auto == 1) ? 0 : 1?>></p>
+                <p><input type="checkbox" name="auto" value=<?=$reservering->auto ?> <?php if($reservering->auto == 1){echo "checked='checked'";}?>></p>
                 <p><input type="submit" name="aanpassen" value="Aanpassen"></p>
             </form>
             </div>

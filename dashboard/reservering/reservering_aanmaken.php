@@ -52,15 +52,15 @@
                 <p><input required name="kinderen4_12" type="number"></p>
 
                 Huisdier?
-                <p><input name="huisdier" value=1 type="checkbox"> <input type="hidden" name="huisdier" value=0></p>
+                <p><input name="huisdier" value=1 type="checkbox"></p>
 
                 Douche munten
                 <p><input name="douche" type="number"></p>
 
                 Wasmachine?
-                <p><input name="wasmachine" value=1 type="checkbox"><input type="hidden" name="wasmachine" value=0></p>
+                <p><input name="wasmachine" value=1 type="checkbox"></p>
                 Wasdroger?
-                <p><input name="wasdroger" value=1 type="checkbox"><input type="hidden" name="wasdroger" value=0></p>
+                <p><input name="wasdroger" value=1 type="checkbox"></p>
 
                 Verblijf
                 <p>
@@ -72,7 +72,7 @@
 
 
                 Auto?
-                <p><input name="auto" value=1 type="checkbox"><input type="hidden" name="auto" value=0></p>
+                <p><input name="auto" value=1 type="checkbox"></p>
                 <p><input name="toevoegen" type="submit"></p>
             </form>
         </div>

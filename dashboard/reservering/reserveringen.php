@@ -66,7 +66,7 @@
             $(document).ready(function() {
                 $("#bulk_verwijderen").on("click", function () {
                     var checkedReserveringen = $(".reservering_box:checked").map(function(){
-                        return this.value["reservering_id"];
+                        return this.value;
                     }).get();
                     var checkedReserveringenJSON = JSON.stringify(checkedReserveringen);
                     $.ajax({
@@ -81,7 +81,7 @@
                     location.replace("reservering_aanmaken.php");
                 })
                 $(".verwijderen").on("click", function () {
-                    var reservering_id = JSON.stringify([$(".verwijderen").val()]);
+                    var reservering_id = JSON.stringify([$(this).val()]);
                     $.ajax({
                         method: "POST",
                         url: "reservering_verwijderen.php",
@@ -92,7 +92,8 @@
 
                 })
                 $(".meer_info").on("click", function () {
-                    var reservering_id = $(".meer_info").val();
+                    var reservering_id = $(this).val();
+                    console.log(reservering_id);
                     location.replace("reservering_meerinfo.php?reservering_id="+reservering_id);
                 })
             });
