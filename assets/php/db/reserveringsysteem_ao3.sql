@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 28 apr 2021 om 12:09
--- Serverversie: 10.4.8-MariaDB
--- PHP-versie: 7.3.11
+-- Gegenereerd op: 22 jun 2021 om 22:44
+-- Serverversie: 10.4.17-MariaDB
+-- PHP-versie: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -34,7 +33,7 @@ CREATE TABLE `accountgegevens` (
   `email` varchar(40) NOT NULL,
   `wachtwoord` varchar(255) NOT NULL,
   `rechten` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `accountgegevens`
@@ -61,7 +60,81 @@ CREATE TABLE `klanten` (
 --
 
 INSERT INTO `klanten` (`klant_id`, `voornaam`, `tussenvoegsel`, `achternaam`) VALUES
-(1, 'Testnaam', '', 'Testachternaam');
+(44, 'Jan', 'van', 'Gugten'),
+(45, 'Maide', 'de ', 'Gouw'),
+(46, 'Victor', '', 'Philippo'),
+(47, 'test', '', 'test'),
+(48, 'tat', '', 'tat'),
+(49, 'Bob', '', 'Hendriks'),
+(50, 'Henk', 'de', 'Water');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `plaatsen`
+--
+
+CREATE TABLE `plaatsen` (
+  `plaatsnummer` int(11) NOT NULL,
+  `grootte` tinyint(1) NOT NULL,
+  `elektriciteit` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `plaatsen`
+--
+
+INSERT INTO `plaatsen` (`plaatsnummer`, `grootte`, `elektriciteit`) VALUES
+(1, 1, 1),
+(2, 1, 1),
+(3, 1, 1),
+(4, 1, 1),
+(5, 1, 1),
+(6, 1, 1),
+(7, 1, 1),
+(8, 1, 1),
+(9, 1, 1),
+(10, 1, 1),
+(11, 1, 1),
+(12, 1, 1),
+(13, 1, 1),
+(14, 1, 1),
+(15, 1, 1),
+(16, 0, 1),
+(17, 0, 1),
+(18, 0, 1),
+(19, 0, 1),
+(20, 0, 1),
+(21, 0, 1),
+(22, 0, 1),
+(23, 0, 1),
+(24, 0, 1),
+(25, 0, 1),
+(26, 1, 0),
+(27, 1, 0),
+(28, 1, 0),
+(29, 1, 0),
+(30, 1, 0),
+(31, 1, 0),
+(32, 1, 0),
+(33, 1, 0),
+(34, 1, 0),
+(35, 1, 0),
+(36, 1, 0),
+(37, 1, 0),
+(38, 1, 0),
+(39, 1, 0),
+(40, 1, 0),
+(41, 0, 0),
+(42, 0, 0),
+(43, 0, 0),
+(44, 0, 0),
+(45, 0, 0),
+(46, 0, 0),
+(47, 0, 0),
+(48, 0, 0),
+(49, 0, 0),
+(50, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -75,16 +148,13 @@ CREATE TABLE `reserveringen` (
   `plaatsnummer` int(11) NOT NULL,
   `begin_datum` datetime NOT NULL,
   `eind_datum` datetime NOT NULL,
+  `volwassene` int(11) NOT NULL,
   `kinderen4_12` int(11) NOT NULL,
   `huisdier` tinyint(1) NOT NULL,
-  `elektriciteit` tinyint(1) NOT NULL,
   `douche` int(11) NOT NULL,
   `wasmachine` tinyint(1) NOT NULL,
   `wasdroger` tinyint(1) NOT NULL,
-  `caravan_klein` tinyint(1) NOT NULL,
-  `caravan_groot` tinyint(1) NOT NULL,
-  `tent_klein` tinyint(1) NOT NULL,
-  `tent_groot` tinyint(1) NOT NULL,
+  `verblijf` tinyint(1) NOT NULL,
   `auto` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -92,8 +162,9 @@ CREATE TABLE `reserveringen` (
 -- Gegevens worden geëxporteerd voor tabel `reserveringen`
 --
 
-INSERT INTO `reserveringen` (`reservering_id`, `klant_id`, `plaatsnummer`, `begin_datum`, `eind_datum`, `kinderen4_12`, `huisdier`, `elektriciteit`, `douche`, `wasmachine`, `wasdroger`, `caravan_klein`, `caravan_groot`, `tent_klein`, `tent_groot`, `auto`) VALUES
-(1, 1, 1, '2021-05-01 12:00:00', '2021-05-07 12:00:00', 2, 1, 1, 4, 1, 0, 1, 0, 0, 0, 1);
+INSERT INTO `reserveringen` (`reservering_id`, `klant_id`, `plaatsnummer`, `begin_datum`, `eind_datum`, `volwassene`, `kinderen4_12`, `huisdier`, `douche`, `wasmachine`, `wasdroger`, `verblijf`, `auto`) VALUES
+(31, 49, 2, '2021-06-10 21:55:00', '2021-06-16 21:55:00', 2, 2, 1, 2, 0, 1, 1, 0),
+(32, 50, 22, '2021-06-04 22:09:00', '2021-06-11 22:09:00', 2, 4, 1, 7, 0, 1, 1, 0);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -106,32 +177,33 @@ ALTER TABLE `klanten`
   ADD PRIMARY KEY (`klant_id`);
 
 --
+-- Indexen voor tabel `plaatsen`
+--
+ALTER TABLE `plaatsen`
+  ADD PRIMARY KEY (`plaatsnummer`);
+
+--
 -- Indexen voor tabel `reserveringen`
 --
 ALTER TABLE `reserveringen`
-  ADD PRIMARY KEY (`reservering_id`);
+  ADD PRIMARY KEY (`reservering_id`),
+  ADD KEY `klant_id` (`klant_id`,`plaatsnummer`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT voor een tabel `accountgegevens`
---
-ALTER TABLE `accountgegevens`
-  MODIFY `gebruikers_id` int(255) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT voor een tabel `klanten`
 --
 ALTER TABLE `klanten`
-  MODIFY `klant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `klant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT voor een tabel `reserveringen`
 --
 ALTER TABLE `reserveringen`
-  MODIFY `reservering_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `reservering_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
