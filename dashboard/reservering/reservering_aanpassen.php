@@ -11,12 +11,12 @@
             "eind_datum" => $_POST["eind_datum"],
             "volwassene" => $_POST["volwassene"],
             "kinderen4_12" => $_POST["kinderen4_12"],
-            "huisdier" => (isset($_POST["huisdier"])) ? intval($_POST["huisdier"]) : 0,
+            "huisdier" => intval($_POST["huisdier"]) ?? (intval($_POST["huisdier"]) == 1) ? 0 : 1,
             "douche" => intval($_POST["douche"]),
-            "wasmachine" => (isset($_POST["wasmachine"])) ? intval($_POST["wasmachine"]) : 0,
-            "wasdroger" => (isset($_POST["wasdroger"])) ? intval($_POST["wasdroger"]) : 0,
+            "wasmachine" => intval($_POST["wasmachine"]) ??  (intval($_POST["wasmachine"]) == 1) ? 0 : 1,
+            "wasdroger" => intval($_POST["wasdroger"]) ?? (intval($_POST["wasdroger"]) == 1) ? 0 : 1,
             "verblijf" => $_POST["verblijf"],
-            "auto" => (isset($_POST["auto"])) ? intval($_POST["auto"]) : 0
+            "auto" => intval($_POST["auto"]) ?? (intval($_POST["auto"]) == 1) ? 0 : 1
         );
         editReservering($edit_array);
         header("Location: reserveringen.php");
