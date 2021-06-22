@@ -68,7 +68,8 @@
                 <div id="reserveringen-container__options">
                     <div id="reserveringen-container__options__content">
                         <input type="text">
-                        <input type="button" value="Aanmaken" onclick="location.href='account_aanmaken.php'">
+                        <button id="aanmaken">Aanmaken</button>
+                        <button id="bulk_verwijderen">Verwijderen</button>
                     </div>
                 </div>
                 <div id="reserveringen-container__reserveringen-table">
