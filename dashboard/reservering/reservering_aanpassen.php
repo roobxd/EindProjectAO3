@@ -1,6 +1,11 @@
 <?php
     require("../../assets/php/reservering_sql.php");
     if(isset($_POST["aanpassen"])){
+        $huisdier_value = isset($_POST["huisdier"]) ? 1 : 0;
+        $wasmachine_value = isset($_POST["wasmachine"]) ? 1 : 0;
+        $wasdroger_value = isset($_POST["wasdroger"]) ? 1 : 0;
+        $auto_value = isset($_POST["auto"]) ? 1 : 0;
+        
         $edit_array = array(
             "reservering_id" => $_POST["reservering_id"],
             "voornaam" => $_POST["voornaam"] ,
@@ -11,15 +16,14 @@
             "eind_datum" => $_POST["eind_datum"],
             "volwassene" => $_POST["volwassene"],
             "kinderen4_12" => $_POST["kinderen4_12"],
-            "huisdier" => (isset($_POST["huisdier"])) ? intval($_POST["huisdier"]) : (intval($_POST["huisdier"]) == 1) ? 0 : 1 ,
-            "douche" => intval($_POST["douche"]),
-            "wasmachine" => (isset($_POST["wasmachine"])) ? intval($_POST["wasmachine"]) : (intval($_POST["wasmachine"]) == 1) ? 0 : 1 ,
-            "wasdroger" => (isset($_POST["wasdroger"])) ? intval($_POST["wasdroger"]) : (intval($_POST["wasdroger"]) == 1) ? 0 : 1 ,
+            "huisdier" => $huisdier_value,
+            "douche" => $_POST["douche"],
+            "wasmachine" => $wasmachine_value,
+            "wasdroger" => $wasdroger_value,
             "verblijf" => $_POST["verblijf"],
-            "auto" => (isset($_POST["auto"])) ? intval($_POST["auto"]) : (intval($_POST["auto"]) == 1) ? 0 : 1 
+            "auto" => $auto_value
         );
         editReservering($edit_array);
         header("Location: reserveringen.php");
     }
-
 ?>
