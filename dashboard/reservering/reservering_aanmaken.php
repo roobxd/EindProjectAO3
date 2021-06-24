@@ -1,6 +1,6 @@
 <?php
-    require("../../assets/template/dashboard_template.html");
-    require("../../assets/php/reservering_sql.php");
+    require_once("../../assets/template/dashboard_template.html");
+    require_once("reservering_php/reservering_sql.php");
 
 ?>
 

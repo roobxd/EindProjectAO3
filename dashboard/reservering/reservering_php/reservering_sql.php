@@ -1,6 +1,6 @@
 <?php
 
-    require("db/database_connectie.php");
+    require_once("../../assets/php/db/database_connectie.php");
 
     class Reservering {
         public $reservering_id;
@@ -104,8 +104,6 @@
     }
 
     function addReservering($reservering){
-
-        
 
         $connection = OpenConnection();
         

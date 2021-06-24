@@ -1,6 +1,6 @@
 <?php
-    require("../../assets/template/dashboard_template.html");
-    require("../../assets/php/reservering_sql.php");
+    require_once("../../assets/template/dashboard_template.html");
+    require_once("reservering_php/reservering_sql.php");
     
     $reservering = selectReservering($_GET["reservering_id"]);
 
@@ -21,17 +21,6 @@
             margin-left: 15%;
 
         }
-
-        #reserveringen-container__options__content{
-            background: var(--main-light);
-            box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
-            border-radius: 15px;
-            margin-bottom: 20px;
-            padding: 15px;
-            display: inline-block;
-        }
-
-
 
     </style>
     <head>

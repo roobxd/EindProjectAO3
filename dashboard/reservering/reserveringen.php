@@ -1,7 +1,7 @@
 
 <?php
-    require("../../assets/template/dashboard_template.html");
-    require("../../assets/php/reservering_sql.php");
+    require_once("../../assets/template/dashboard_template.html");
+    require_once("reservering_php/reservering_sql.php");
 ?> 
 <html>
     <style>
@@ -63,6 +63,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script type="text/javascript">
+    // CHECK DUBBELE BOEKINGEN EN SHIT
             $(document).ready(function() {
                 $("#bulk_verwijderen").on("click", function () {
                     var checkedReserveringen = $(".reservering_box:checked").map(function(){

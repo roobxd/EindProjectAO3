@@ -1,5 +1,5 @@
 <?php
-    require("../../assets/php/reservering_sql.php");
+    require_once("../../assets/php/reservering_sql.php");
     if(isset($_POST["toevoegen"])){
         $add_reservering_array = array(
             "voornaam" => $_POST["voornaam"] ,
@@ -18,7 +18,7 @@
             "auto" => (isset($_POST["auto"])) ? intval($_POST["auto"]) : 0
         );
         addReservering($add_reservering_array);
-        header("Location: reserveringen.php");
+        header("Location: ../reserveringen.php");
     }
 
 

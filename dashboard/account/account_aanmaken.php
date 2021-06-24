@@ -1,6 +1,6 @@
 <?php
-    require("../../assets/template/dashboard_template.html");
-    require("../../assets/php/account_sql.php");
+    require_once("../../assets/template/dashboard_template.html");
+    require_once("account_php/account_sql.php");
 ?>
 
 
