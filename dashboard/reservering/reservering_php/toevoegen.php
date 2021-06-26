@@ -1,5 +1,5 @@
 <?php
-    require_once("../../assets/php/reservering_sql.php");
+    require_once(__DIR__."/reservering_sql.php");
     if(isset($_POST["toevoegen"])){
         $add_reservering_array = array(
             "voornaam" => $_POST["voornaam"] ,

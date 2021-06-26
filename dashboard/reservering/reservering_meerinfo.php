@@ -1,6 +1,6 @@
 <?php
-    require_once("../../assets/template/dashboard_template.html");
-    require_once("reservering_php/reservering_sql.php");
+    require_once(__DIR__."/../../assets/template/dashboard_template.html");
+    require_once(__DIR__."/reservering_php/reservering_sql.php");
     
     $reservering = selectReservering($_GET["reservering_id"]);
 

@@ -1,7 +1,7 @@
 
 <?php
-    require_once("../../assets/template/dashboard_template.html");
-    require_once("reservering_php/reservering_sql.php");
+    require_once(__DIR__."/../../assets/template/dashboard_template.html");
+    require_once(__DIR__."/reservering_php/reservering_sql.php");
 ?> 
 <html>
     <style>
@@ -72,7 +72,7 @@
                     var checkedReserveringenJSON = JSON.stringify(checkedReserveringen);
                     $.ajax({
                         method: "POST",
-                        url: "reservering_verwijderen.php",
+                        url: "reservering_php/verwijderen.php",
                         data: {bulk_delete: checkedReserveringenJSON},
                     }).done(function() {
                         location.reload();
@@ -85,7 +85,7 @@
                     var reservering_id = JSON.stringify([$(this).val()]);
                     $.ajax({
                         method: "POST",
-                        url: "reservering_verwijderen.php",
+                        url: "reservering_php/verwijderen.php",
                         data: {single_delete: reservering_id},
                     }).done(function() {
                         location.reload();

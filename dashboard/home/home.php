@@ -1,5 +1,5 @@
 <?php
-    require("../../assets/template/dashboard_template.html");
+    require(__DIR__."/../../assets/template/dashboard_template.html");
 ?>
 
 <html>
@@ -16,7 +16,9 @@
     <body>
         <div id="main">
             <div id="stat-grid">
+                <?PHP
 
+                ?>
             </div>
         </div>
     </body>

@@ -1,6 +1,6 @@
 <?php
-    require_once("../../assets/template/dashboard_template.html");
-    require_once("reservering_php/reservering_sql.php");
+    require_once(__DIR__."/../../assets/template/dashboard_template.html");
+    require_once(__DIR__."/reservering_php/reservering_sql.php");
 
 ?>
 
@@ -31,7 +31,7 @@
 <body>
     <div id="main">
         <div id="reservering-form">
-            <form action="reservering_toevoegen.php" method="POST">
+            <form action="reservering_php/toevoegen.php" method="POST">
                 Voornaam
                 <p><input required name="voornaam" type="text"></p>
                 Tussenvoegsel

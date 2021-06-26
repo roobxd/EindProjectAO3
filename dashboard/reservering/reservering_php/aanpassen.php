@@ -1,5 +1,5 @@
 <?php
-    require_once("reservering_sql.php");
+    require_once(__DIR__."/reservering_sql.php");
     if(isset($_POST["aanpassen"])){
         $huisdier_value = isset($_POST["huisdier"]) ? 1 : 0;
         $wasmachine_value = isset($_POST["wasmachine"]) ? 1 : 0;

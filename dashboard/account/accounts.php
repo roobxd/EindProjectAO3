@@ -1,6 +1,6 @@
 <?php
-    require_once("../../assets/template/dashboard_template.html");
-    require_once("account_php/account_sql.php");
+    require_once(__DIR__."/../../assets/template/dashboard_template.html");
+    require_once(__DIR__."/account_php/account_sql.php");
 ?>
 
 <html>
@@ -63,27 +63,27 @@
     <script type="text/javascript">
             $(document).ready(function() {
                 $("#bulk_verwijderen").on("click", function () {
-                    var checkedaccount = $(".reservering_box:checked").map(function(){
+                    var checkedAccounts = $(".account_box:checked").map(function(){
                         return this.value;
                     }).get();
-                    var checkedaccountJSON = JSON.stringify(checkedaccount);
+                    var checkedAccountJSON = JSON.stringify(checkedAccounts);
                     $.ajax({
                         method: "POST",
-                        url: "reservering_verwijderen.php",
-                        data: {bulk_delete: checkedaccountJSON},
+                        url: "account_php/verwijderen.php",
+                        data: {bulk_delete: checkedAccountJSON},
                     }).done(function() {
                         location.reload();
                     })
                 });
                 $("#aanmaken").on("click", function () {
-                    location.replace("reservering_aanmaken.php");
+                    location.replace("account_aanmaken.php");
                 })
                 $(".verwijderen").on("click", function () {
-                    var reservering_id = JSON.stringify([$(this).val()]);
+                    var account_id = JSON.stringify([$(this).val()]);
                     $.ajax({
                         method: "POST",
-                        url: "account_php/remove.php",
-                        data: {single_delete: reservering_id},
+                        url: "account_php/verwijderen.php",
+                        data: {single_delete: account_id},
                     }).done(function() {
                         location.reload();
                     })
@@ -111,7 +111,7 @@
                         <?php
                             foreach(returnAccounts() as $account){
                                 echo "<tr>";
-                                echo "<td> <input type='checkbox' value=".$account->gebruiker_id."> </td>";
+                                echo "<td> <input type='checkbox' class='account_box' value=".$account->gebruiker_id."> </td>";
                                 foreach($account->return_small_result() as $result){
                                     echo "<td>".$result."</td>";
                                 }
