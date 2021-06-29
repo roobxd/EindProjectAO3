@@ -42,9 +42,9 @@
                 Plaatsnummer
                 <p><input required name="plaatsnummer" type="number"></p>
                 Begin Datum
-                <p><input required name="begin_datum" type="datetime-local">
+                <p><input required name="begin_datum" type="date">
                 Eind Datum
-                <input required name="eind_datum" type="datetime-local"></p>
+                <input required name="eind_datum" type="date"></p>
 
                 Volwassene
                 <p><input required name="volwassene" type="number"></p>

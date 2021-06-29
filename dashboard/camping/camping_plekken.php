@@ -1,5 +1,6 @@
 <?php
     require(__DIR__."/../../assets/template/dashboard_template.html");
+    require(__DIR__."/camping_php/camping_sql.php");
 ?>
 
 <style>
@@ -9,7 +10,7 @@
             background-color: var(--main-background);
         }
 
-        #reserveringen-container{
+        #camping-container{
             background-color: var(--main-background);
             height: 70%;
             max-width: 70%;
@@ -18,7 +19,7 @@
 
         }
 
-        #reserveringen-container__options__content{
+        #camping-container__options__content{
             background: var(--main-light);
             box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
             border-radius: 15px;
@@ -27,7 +28,7 @@
             display: inline-block;
         }
 
-        #reserveringen-container__reserveringen-table table{
+        #camping-container__camping-table table{
             border-collapse: collapse;
             min-width: inherit;
             max-height: inherit;
@@ -38,20 +39,20 @@
 
         }
 
-        #reserveringen-container__reserveringen-table th{
+        #camping-container__camping-table th{
             padding: 10px;
             text-align: left;
             background-color: var(--accent-green);
             color: #ffffff;
         }
 
-        #reserveringen-container__reserveringen-table td{
+        #camping-container__camping-table td{
             padding: 10px;
             text-align: left;
             word-wrap: break-word;
         }
 
-        #reserveringen-container__reserveringen-table tr:nth-child(odd){
+        #camping-container__camping-table tr:nth-child(odd){
             background-color: #f5f5f5;
         }
 </style>
@@ -67,20 +68,21 @@
                     <button>Check</button>
                 </div>
             </div>
-            <div id="reserveringen-container__reserveringen-table">
-                <table id="reservering-table">
-                    <tr><th>#</th><th>Voornaam</th><th>Tussenvoegsel</th><th>Achternaam</th><th>Begin Datum</th><th>Eind Datum</th><th>Eindbedrag</th><th>Acties</th></tr>
+            <div id="camping-container__camping-table">
+                <table id="camping-table">
+                    <tr><th>#</th><th>Grootte</th><th>Elektriciteit</th><th>Beschikbaar?</th></tr>
                     <?php
-                        foreach(){
-                            echo "<tr>";
-                            foreach(){
 
-                                echo "<td>".."</td>";
+                        foreach(returnPlekken() as $plek){
+                            echo "<tr>";
+                            foreach($plek->return_result() as $result){
+
+                                echo "<td>".$result."</td>";
                         
                             }
-                            echo "<td>€". ."</td>";
                             echo "</tr>";
                         }
+
                     ?>
                 </table>
             </div>

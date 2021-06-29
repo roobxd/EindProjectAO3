@@ -63,7 +63,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script type="text/javascript">
-    // CHECK DUBBELE BOEKINGEN EN SHIT
             $(document).ready(function() {
                 $("#bulk_verwijderen").on("click", function () {
                     var checkedReserveringen = $(".reservering_box:checked").map(function(){
@@ -97,6 +96,10 @@
                     console.log(reservering_id);
                     location.replace("reservering_meerinfo.php?reservering_id="+reservering_id);
                 })
+                $(".factuur").on("click", function () {
+                    var reservering_id = $(this).val();
+                    location.replace("factuur.php?reservering_id="+reservering_id)
+                })
             });
     </script> 
     </head>
@@ -122,8 +125,8 @@
                                     echo "<td>".$result."</td>";
                            
                                 }
-                                echo "<td>€". $reservering->calculate_price() ."</td>";
-                                echo "<td><button value=".$reservering->reservering_id." class='meer_info'>Meer Info / Aanpassen</button><button value=".$reservering->reservering_id." class='verwijderen'>Verwijderen</button></td>";
+                                echo "<td>€". $reservering->calculate_price(NULL) ."</td>";
+                                echo "<td><button value=".$reservering->reservering_id." class='meer_info'>Meer Info / Aanpassen</button><button value=".$reservering->reservering_id." class='verwijderen'>Verwijderen</button><button class='factuur' value=".$reservering->reservering_id.">Factuur</button></td>";
                                 echo "</tr>";
                             }
                         ?>

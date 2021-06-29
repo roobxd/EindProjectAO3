@@ -17,8 +17,15 @@
             "verblijf" => $_POST["verblijf"],
             "auto" => (isset($_POST["auto"])) ? intval($_POST["auto"]) : 0
         );
-        addReservering($add_reservering_array);
-        header("Location: ../reserveringen.php");
+        if(checkBeschikbaar($add_reservering_array["plaatsnummer"], $add_reservering_array["begin_datum"], $add_reservering_array["eind_datum"])){
+            addReservering($add_reservering_array);
+            header("Location: ../reserveringen.php");
+        } else {
+            echo "Plek niet beschikbaar..";
+            echo "<meta http-equiv='refresh' content='3;url=../reservering_aanmaken.php'>";
+        }
+
+        
     }
 
 

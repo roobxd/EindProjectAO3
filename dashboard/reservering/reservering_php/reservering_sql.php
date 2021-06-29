@@ -27,8 +27,6 @@
             }
 
         }
-
-
         function return_small_result(){
             $result = array(
                 $this->plaatsnummer,
@@ -41,8 +39,52 @@
             return $result;
         } 
 
+        function return_factuur(){
+            $factuur_info = array(
+                "volwassene" => "q", 
+                "kinderen4_12" => "q",
+                "huisdier" => "b",
+                "elektriciteit" => "b",
+                "douche" => "q",
+                "wasmachine" => "b",
+                "wasdroger" => "b",
+                "verblijf" => "o",
+                "auto" => "b",
+            ); 
 
-        function calculate_price(){
+            $factuur = array();
+            foreach($this as $key => $value){
+                if(array_key_exists($key, $factuur)){
+                    if($factuur[$key] == "q" && $value > 0){
+                        array_push($factuur, array($key => $value));
+                    }
+                    elseif($factuur[$key] == "b" && $value == 1){
+                        array_push($factuur, array($key => $value));
+                    }
+                    elseif($factuur[$key] == "o"){
+                        array_push($factuur, array($key => $value));
+                    }
+                }
+            }
+            return $factuur;
+        }
+
+        function return_fancy_name($key){
+            $reservering_naam = array(
+                "volwassene" => "Volwassene",
+                "kinderen4_12" => "Kinderen",
+                "huisdier" => "Huisdier",
+                "elektriciteit" => "Elektriciteit",
+                "douche" => "Douche Munten",
+                "wasmachine" => "Wasmachine",
+                "wasdroger" => "Wasdroger",
+                "verblijf" => "Verblijf",
+                "auto" => "Auto"
+            );
+            return $reservering_naam[$key];
+        }
+
+        function calculate_price($item){
             $prijzen = array(
                 "volwassene" => array("q", 5), 
                 "kinderen4_12" => array("q", 4),
@@ -62,21 +104,53 @@
             $begin = new DateTime($this->begin_datum);
             $end = new DateTime($this->eind_datum);
             $days = intval($begin->diff($end)->format("%R%a"));
-            foreach($this as $key => $value){
-                if(array_key_exists($key, $prijzen)){
-                    if($key == "verblijf"){
-                       $price += $prijzen["verblijf"][$this->verblijf][$this->grootte] * $days;
+            if($item == NULL){
+                foreach($this as $key => $value){
+                    if(array_key_exists($key, $prijzen)){
+                        if($key == "verblijf"){
+                           $price += $prijzen["verblijf"][$this->verblijf][$this->grootte] * $days;
+                        }
+                        elseif($prijzen[$key][0] == "q"){
+                            $price += ($prijzen[$key][1] * $value) * $days;
+                        }
+                        else {
+                            $price += $prijzen[$key][1] * $days;
+                        }
                     }
-                    elseif($prijzen[$key][0] == "q"){
-                        $price += ($prijzen[$key][1] * $value) * $days;
-                    }
-                    else {
-                        $price += $prijzen[$key][1] * $days;
-                    }
+                }
+            } else {
+                if($item == "verblijf"){
+                    return $prijzen["verblijf"][$this->verblijf][$this->grootte] * $days;              
+                }
+                elseif($prijzen[$item][0] == "q"){
+                    return ($prijzen[$item][1] * $this->$item) * $days;
+                }
+                else {
+                    return $prijzen[$item][1] * $days;
                 }
             }
             return $price;
         }
+    }
+
+    function checkBeschikbaar($plaatsnummer, $begin_datum, $eind_datum){
+        $connection = OpenConnection();
+        $prep_query = $connection->prepare("SELECT * FROM `reserveringen` WHERE (? <= `reserveringen`.`eind_datum` AND ? >= `reserveringen`.`eind_datum`) AND `reserveringen`.`plaatsnummer` = ?");
+
+        $prep_query->bind_param("ssi", $begin_datum, $eind_datum, $plaatsnummer );
+        $prep_query->execute();
+
+        
+        if($plaatsnummer >= 0 && $plaatsnummer <= 50){
+            if($result = $prep_query->get_result()->num_rows == 0){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        CloseConnection($connection);
     }
 
     function selectReservering($reservering_id){
@@ -85,14 +159,14 @@
 
         $prep_query->bind_param("ii", $reservering_id, $reservering_id);
         $prep_query->execute();
-
+        
         $result = $prep_query->get_result();
         
         CloseConnection($connection);
         return new Reservering($result->fetch_assoc());
     }
+    
     function removeReservering($reservering_ids){
-        
         $connection = OpenConnection();
         $prep_query = $connection->prepare("DELETE FROM `reserveringen` WHERE `reservering_id` = ?");
         foreach($reservering_ids as $reservering_id){

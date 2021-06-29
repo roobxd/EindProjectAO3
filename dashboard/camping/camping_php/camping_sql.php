@@ -16,27 +16,27 @@
         }
 
 
-        function return_small_result(){
+        function return_result(){
             $result = array(
-                $this->gebruiker_id,
-                $this->gebruikersnaam,
-                $this->email,
-                $this->rechten
-            );
+                $this->plaatsnummer,
+                ($this->grootte == 1) ? "Groot" : "Klein",
+                ($this->elektriciteit == 1) ? "Ja" : "Nee",
+                $this->beschikbaar
+             );
             return $result;
         } 
 
     }
 
-    function returnAccounts(){
+    function returnPlekken(){
         $connection = OpenConnection();
-        $result = $connection->query("SELECT *, CASE WHEN NOW() BETWEEN (SELECT `begin_datum` FROM `reserveringen` WHERE `plaatsnummer` = `plaatsen`.`plaatsnummer`) AND (SELECT `eind_datum` FROM `reserveringen` WHERE `plaatsnummer` = `plaatsen`.`plaatsnummer`) THEN 'Bezet' ELSE 'Vrij' END AS 'bezet' FROM `plaatsen`");
-        $account_array = array();
+        $result = $connection->query("SELECT `plaatsen`.*, CASE WHEN NOW() BETWEEN `reserveringen`.`begin_datum` AND `reserveringen`.`eind_datum` THEN 'Bezet' ELSE 'Vrij' END AS 'beschikbaar' FROM `plaatsen` LEFT JOIN `reserveringen` ON `reserveringen`.`plaatsnummer` = `plaatsen`.`plaatsnummer` GROUP BY `plaatsen`.`plaatsnummer`");
+        $camping_array = array();
         while ( $arr = $result->fetch_assoc() ){
-            array_push($account_array, new Account($arr)); 
+            array_push($camping_array, new CampingPlek($arr)); 
         }
         CloseConnection($connection);
-        return $account_array;
+        return $camping_array;
     }
 
 ?>

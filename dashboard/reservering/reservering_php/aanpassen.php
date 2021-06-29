@@ -23,7 +23,12 @@
             "verblijf" => $_POST["verblijf"],
             "auto" => $auto_value
         );
-        editReservering($edit_array);
-        header("Location: ../reserveringen.php");
+        if(checkBeschikbaar($edit_array["plaatsnummer"], $edit_array["begin_datum"], $edit_array["eind_datum"])){
+            editReservering($edit_array);
+            header("Location: ../reserveringen.php");
+        } else {
+            echo "Plek niet beschikbaar..";
+            echo "<meta http-equiv='refresh' content='3;url=../reservering_meerinfo.php?reservering_id=".$edit_array["reservering_id"].">";
+        }
     }
 ?>

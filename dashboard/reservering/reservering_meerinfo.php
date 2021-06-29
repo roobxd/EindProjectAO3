@@ -30,7 +30,7 @@
     <body>
         <div id="main">
             <div id="reserveringen-container">
-            <form action="reservering_aanpassen.php" method="POST">
+            <form action="reservering_php/aanpassen.php" method="POST">
                 <input type="hidden" name="reservering_id" value=<?=$_GET["reservering_id"];?>>
                 Voornaam
                 <p><input type="text" name="voornaam" value= <?= $reservering->voornaam ?>></p>
@@ -42,9 +42,9 @@
                 Plaatsnummer
                 <p><input type="number" name="plaatsnummer" value= <?= $reservering->plaatsnummer ?>></p>
                 Begin Datum
-                <p><input type="datetime-local" name="begin_datum" value= <?= date('Y-m-d\TH:i:s', strtotime($reservering->begin_datum)); ?>>
+                <p><input type="date" name="begin_datum" value= <?= date('Y-m-d\TH:i:s', strtotime($reservering->begin_datum)); ?>>
                 Eind Datum
-                <input type="datetime-local" name="eind_datum" value= <?= date('Y-m-d\TH:i:s', strtotime($reservering->eind_datum)); ?>></p>
+                <input type="date" name="eind_datum" value= <?= date('Y-m-d\TH:i:s', strtotime($reservering->eind_datum)); ?>></p>
 
                 Volwassene  
                 <p><input type="number" name="volwassene" value= <?= $reservering->volwassene ?>></p>
