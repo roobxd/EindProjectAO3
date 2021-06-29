@@ -25,6 +25,9 @@
 				text-align: left;
 			}
 
+			.details{
+				font-size:15px;
+			}
 
 		</style>
 	</head>
@@ -33,34 +36,38 @@
 		<div id="factuur">
             <table>
                 <tr>
-                    <td id="logo"><img src="../../assets/img/logo.png"/ style="max-width: 50%; height: auto;"></td>
                     <td>
+						<img src="../../assets/img/logo.png" style="max-width: 50%; height: auto;">
 						<p>La Rustique</p>
-						<p>63420 Ardes</p>
-						<p>04-76372000 | info@larustique.com</p>
+						<p class="details">63420 Ardes<br>
+						Tel: 04-76372000<br>
+						info@larustique.com</p>
 					</td>
                 </tr>
 				<tr>
-					<td>
+					<td colspan=100%>
 						<p><?= $reservering->voornaam ?> <?= $reservering->tussenvoegsel ?> <?= $reservering->achternaam ?></p>
-						<p>Begin Datum: <?= $reservering->begin_datum ?></p>
-						<p>Eind Datum: <?= $reservering->eind_datum ?></p>
+						<p class="details">Begin Datum: <?= $reservering->begin_datum ?><br>
+						Eind Datum: <?= $reservering->eind_datum ?></p>
 						<hr>
 					</td>
 				</tr>
 				<tr>
-					<td><h2>Factuur</h2>
-						<p>Factuurnummer: <?= rand(100000000,999999999)  ?></p>
-						<p>Factuurdatum: <?= date("Y/m/d") ?></p>
+					<td colspan=100%;>
+						<h2>Factuur</h2>
+						<p class="details">Factuurnummer: <?= rand(100000000,999999999)  ?><br>
+						Factuurdatum: <?= date("Y/m/d H:m:s") ?></p>
 						<hr>
 					</td>
 				</tr>
 				<tr>
-					<th>Dingen</th><th>Quantiteit</th><th style="float: right;">Prijs</th>
+					<th>Beschrijving</th><th>Quantiteit</th><th style="float: right;">Prijs</th>
 					<?php 
 						foreach($reservering->return_factuur() as $r){
-							echo "<tr><td>".$reservering->return_fancy_name($r[0])."</td><td>".."</td></tr>"
+							echo "<tr><td>".$reservering->return_fancy_name($r)."</td><td>".($r == "")."</td><td>€".$reservering->calculate_price($r)."</td></tr>";
 						}
+						echo "<tr><td colspan='100%'><hr></td></tr>";
+						echo "<tr><td>Totaal Prijs:</td><td></td><td>€".$reservering->calculate_price(NULL)."</td></tr>";
 					?>
 				</tr>
             </table>
