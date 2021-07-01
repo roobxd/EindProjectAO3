@@ -16,6 +16,7 @@
             max-width: 70%;
             padding: 15px;
             margin-left: 15%;
+            text-align: center;
 
         }
 
@@ -29,6 +30,7 @@
         }
 
         #camping-container__camping-table table{
+            display: inline-block;
             border-collapse: collapse;
             min-width: inherit;
             max-height: inherit;
@@ -52,25 +54,33 @@
             word-wrap: break-word;
         }
 
-        #camping-container__camping-table tr:nth-child(odd){
+        #camping-container__camping-table tr:nth-child(even){
             background-color: #f5f5f5;
         }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#plek-filter").on("keyup", function() {
+            const value = $(this).val().toLowerCase();
+            $("#camping-table tr").not("thead tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 <body>
     <div id="main">
         <div id="camping-container">
             <div id="camping-container__options">
                 <div id="camping-container__options__content">
-                    <input type="text">
-                    <input type="datetime">
-                    <input type="datetime">
-                    <button>Check</button>
+                    <input id="plek-filter" type="text">
                 </div>
             </div>
             <div id="camping-container__camping-table">
                 <table id="camping-table">
-                    <tr><th>#</th><th>Grootte</th><th>Elektriciteit</th><th>Beschikbaar?</th></tr>
+                    <thead><tr><th>#</th><th>Grootte</th><th>Elektriciteit</th><th>Beschikbaar?</th></tr></thead>
                     <?php
 
                         foreach(returnPlekken() as $plek){

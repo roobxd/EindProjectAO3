@@ -17,6 +17,8 @@
             max-width: 70%;
             padding: 15px;
             margin-left: 15%;
+            text-align: center;
+            justify-content: center;
 
         }
 
@@ -26,6 +28,7 @@
             min-width: inherit;
             max-height: inherit;
             box-sizing: border-box;
+            margin: 0 auto;
             background-color: var(--main-light);
             box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
             border-radius: 15px;
@@ -45,7 +48,7 @@
             word-wrap: break-word;
         }
 
-        #account-container__account-table tr:nth-child(odd){
+        #account-container__account-table tr:nth-child(even){
             background-color: #f5f5f5;
         }
         #account-container__options__content{
@@ -62,11 +65,18 @@
 
     <script type="text/javascript">
             $(document).ready(function() {
+                $("#account-filter").on("keyup", function() {
+                    const value = $(this).val().toLowerCase();
+                    $("#account-table tr").not("thead tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+
                 $("#bulk_verwijderen").on("click", function () {
-                    var checkedAccounts = $(".account_box:checked").map(function(){
+                    const checkedAccounts = $(".account_box:checked").map(function(){
                         return this.value;
                     }).get();
-                    var checkedAccountJSON = JSON.stringify(checkedAccounts);
+                    const checkedAccountJSON = JSON.stringify(checkedAccounts);
                     $.ajax({
                         method: "POST",
                         url: "account_php/verwijderen.php",
@@ -75,11 +85,13 @@
                         location.reload();
                     })
                 });
+
                 $("#aanmaken").on("click", function () {
                     location.replace("account_aanmaken.php");
                 })
+
                 $(".verwijderen").on("click", function () {
-                    var account_id = JSON.stringify([$(this).val()]);
+                    const account_id = JSON.stringify([$(this).val()]);
                     $.ajax({
                         method: "POST",
                         url: "account_php/verwijderen.php",
@@ -89,8 +101,9 @@
                     })
 
                 })
+
                 $(".bewerken").on("click", function () {
-                    var account_id = $(this).val();
+                    const account_id = $(this).val();
                     location.replace("account_bewerken.php?account_id="+account_id);
                 })
             });
@@ -100,14 +113,14 @@
             <div id="account-container">
                 <div id="account-container__options">
                     <div id="account-container__options__content">
-                        <input type="text">
+                        <input id="account-filter" type="text">
                         <button id="aanmaken">Aanmaken</button>
                         <button id="bulk_verwijderen">Verwijderen</button>
                     </div>
                 </div>
                 <div id="account-container__account-table">
-                    <table>
-                        <tr><th></th><th>#</th><th>Gebruikersnaam</th><th>Email</th><th>Machtigingsniveau</th><th>Wachtwoord</th><th>Acties</th></tr>
+                    <table id="account-table">
+                        <thead><tr><th></th><th>#</th><th>Gebruikersnaam</th><th>Email</th><th>Machtigingsniveau</th><th>Wachtwoord</th><th>Acties</th></tr></thead>
                         <?php
                             foreach(returnAccounts() as $account){
                                 echo "<tr>";

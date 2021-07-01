@@ -31,8 +31,16 @@
             #nav-menu__logo{
                 width: 100%;
                 height: 5%;
-                padding: 0;
                 background-color: var(--accent-green);
+                text-align: center;
+                display: table;
+            }
+
+            #nav-menu__logo p{
+                display: table-cell;
+                vertical-align: middle;
+                color: var(--main-light);
+                font-weight: bold;
             }
 
             #nav-menu__redirect{margin-top: 50px;}
@@ -54,15 +62,13 @@
 
             .nav-menu__redirect__item span {margin-left: 2em;}
 
-            #nav-menu__logo{padding: 5px;}
-
 
         </style>
     </head>
     <body>
         <div id="nav-container">
             <div id="nav-menu__logo">
-
+                <p>La Rustique</p>
             </div>
             <div id="nav-menu__redirect">
                 <div class="nav-menu__redirect__item">

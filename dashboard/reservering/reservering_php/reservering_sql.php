@@ -53,35 +53,21 @@
             ); 
 
             $factuur = array();
+      
             foreach($this as $key => $value){
-                if(array_key_exists($key, $factuur)){
-                    if($factuur[$key] == "q" && $value > 0){
-                        array_push($factuur, array($key => $value));
+                if(array_key_exists($key, $factuur_info)){
+                    if($factuur_info[$key] === "q" && $value > 0){
+                        array_push($factuur, $key);
                     }
-                    elseif($factuur[$key] == "b" && $value == 1){
-                        array_push($factuur, array($key => $value));
+                    elseif($factuur_info[$key] === "b" && $value == 1){
+                        array_push($factuur, $key);
                     }
-                    elseif($factuur[$key] == "o"){
-                        array_push($factuur, array($key => $value));
+                    elseif($factuur_info[$key] === "o"){
+                        array_push($factuur, $key);
                     }
                 }
             }
             return $factuur;
-        }
-
-        function return_fancy_name($key){
-            $reservering_naam = array(
-                "volwassene" => "Volwassene",
-                "kinderen4_12" => "Kinderen",
-                "huisdier" => "Huisdier",
-                "elektriciteit" => "Elektriciteit",
-                "douche" => "Douche Munten",
-                "wasmachine" => "Wasmachine",
-                "wasdroger" => "Wasdroger",
-                "verblijf" => "Verblijf",
-                "auto" => "Auto"
-            );
-            return $reservering_naam[$key];
         }
 
         function calculate_price($item){
@@ -110,10 +96,10 @@
                         if($key == "verblijf"){
                            $price += $prijzen["verblijf"][$this->verblijf][$this->grootte] * $days;
                         }
-                        elseif($prijzen[$key][0] == "q"){
+                        elseif($prijzen[$key][0] == "q" && $value > 0){
                             $price += ($prijzen[$key][1] * $value) * $days;
                         }
-                        else {
+                        elseif($prijzen[$key][0] == "b" && $value == 1){
                             $price += $prijzen[$key][1] * $days;
                         }
                     }
@@ -122,15 +108,30 @@
                 if($item == "verblijf"){
                     return $prijzen["verblijf"][$this->verblijf][$this->grootte] * $days;              
                 }
-                elseif($prijzen[$item][0] == "q"){
+                elseif($prijzen[$item][0] == "q" && $this->$item > 0){
                     return ($prijzen[$item][1] * $this->$item) * $days;
                 }
-                else {
+                elseif($prijzen[$item][0] == "b" && $this->$item == 1){
                     return $prijzen[$item][1] * $days;
                 }
             }
             return $price;
         }
+    }
+    
+    function return_fancy_name($key){
+        $reservering_naam = array(
+            "volwassene" => "Volwassene",
+            "kinderen4_12" => "Kinderen",
+            "huisdier" => "Huisdier",
+            "elektriciteit" => "Elektriciteit",
+            "douche" => "Douche Munten",
+            "wasmachine" => "Wasmachine",
+            "wasdroger" => "Wasdroger",
+            "verblijf" => "Verblijf",
+            "auto" => "Auto"
+        );
+        return $reservering_naam[$key];
     }
 
     function checkBeschikbaar($plaatsnummer, $begin_datum, $eind_datum){

@@ -10,6 +10,7 @@
         #main{
             width: auto;
             height: 100%;
+            margin-left: 15%;
             background-color: var(--main-background);
         }
 

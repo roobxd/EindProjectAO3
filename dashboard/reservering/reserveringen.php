@@ -8,6 +8,7 @@
         #main{
             width: auto;
             height: 100%;
+            margin-left: 15%;
             background-color: var(--main-background);
         }
 
@@ -53,7 +54,7 @@
             word-wrap: break-word;
         }
 
-        #reserveringen-container__reserveringen-table tr:nth-child(odd){
+        #reserveringen-container__reserveringen-table tr:nth-child(even){
             background-color: #f5f5f5;
         }
 
@@ -64,6 +65,13 @@
 
     <script type="text/javascript">
             $(document).ready(function() {
+                $("#reservering-filter").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#reservering-table tr").not("thead tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+
                 $("#bulk_verwijderen").on("click", function () {
                     var checkedReserveringen = $(".reservering_box:checked").map(function(){
                         return this.value;
@@ -77,9 +85,11 @@
                         location.reload();
                     })
                 });
+
                 $("#aanmaken").on("click", function () {
                     location.replace("reservering_aanmaken.php");
-                })
+                });
+
                 $(".verwijderen").on("click", function () {
                     var reservering_id = JSON.stringify([$(this).val()]);
                     $.ajax({
@@ -90,16 +100,17 @@
                         location.reload();
                     })
 
-                })
+                });
+
                 $(".meer_info").on("click", function () {
                     var reservering_id = $(this).val();
                     console.log(reservering_id);
                     location.replace("reservering_meerinfo.php?reservering_id="+reservering_id);
-                })
+                });
                 $(".factuur").on("click", function () {
                     var reservering_id = $(this).val();
                     location.replace("factuur.php?reservering_id="+reservering_id)
-                })
+                });
             });
     </script> 
     </head>
@@ -108,14 +119,14 @@
             <div id="reserveringen-container">
                 <div id="reserveringen-container__options">
                     <div id="reserveringen-container__options__content">
-                        <input type="text">
+                        <input id="reservering-filter" type="text">
                         <button id="aanmaken">Aanmaken</button>
                         <button id="bulk_verwijderen">Verwijderen</button>
                     </div>
                 </div>
                 <div id="reserveringen-container__reserveringen-table">
                     <table id="reservering-table">
-                        <tr><th></th><th>#</th><th>Voornaam</th><th>Tussenvoegsel</th><th>Achternaam</th><th>Begin Datum</th><th>Eind Datum</th><th>Eindbedrag</th><th>Acties</th></tr>
+                        <thead><tr><th></th><th>#</th><th>Voornaam</th><th>Tussenvoegsel</th><th>Achternaam</th><th>Begin Datum</th><th>Eind Datum</th><th>Eindbedrag</th><th>Acties</th></tr></thead>
                         <?php
                             foreach(returnReserveringen() as $reservering){
                                 echo "<tr>";
