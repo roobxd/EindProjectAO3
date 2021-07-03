@@ -64,7 +64,11 @@
 					<th>Beschrijving</th><th>Quantiteit</th><th style="float: right;">Prijs</th>
 					<?php 
 						foreach($reservering->return_factuur() as $r){
+<<<<<<< HEAD
 							echo "<tr><td>".return_fancy_name($r)."</td><td>".($r == "huisdier")."</td><td>€".$reservering->calculate_price($r)."</td></tr>";
+=======
+							echo "<tr><td>".$reservering->return_fancy_name($r)."</td><td>".($r == "")."</td><td>€".$reservering->calculate_price($r)."</td></tr>";
+>>>>>>> 7dbae7f1ad79f8d8afc0199d40cda9e81fba4478
 						}
 						echo "<tr><td colspan='100%'><hr></td></tr>";
 						echo "<tr><td>Totaal Prijs:</td><td></td><td>€".$reservering->calculate_price(NULL)."</td></tr>";

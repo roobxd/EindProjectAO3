@@ -1,19 +1,30 @@
+<<<<<<< HEAD
 <?php
     require_once(__DIR__."/../../assets/template/dashboard_template.html");
     require_once(__DIR__."/stats_php/statistieken_sql.php");
 ?> 
 
 
+=======
+
+<?php
+    require_once(__DIR__."/../../assets/template/dashboard_template.html");
+?> 
+>>>>>>> 7dbae7f1ad79f8d8afc0199d40cda9e81fba4478
 <html>
     <style>
         #main{
             width: auto;
             height: 100%;
+<<<<<<< HEAD
             margin-left: 15%;
+=======
+>>>>>>> 7dbae7f1ad79f8d8afc0199d40cda9e81fba4478
             background-color: var(--main-background);
         }
 
         #stats-container{
+<<<<<<< HEAD
             padding: 2%;
             grid-template-columns: auto auto auto;
             grid-gap: 5px;
@@ -35,6 +46,16 @@
 
 
 
+=======
+            display: flex;
+        }
+
+        #stats-container__item{
+            
+        }
+
+
+>>>>>>> 7dbae7f1ad79f8d8afc0199d40cda9e81fba4478
     </style>
     <head>
 
@@ -42,6 +63,7 @@
     <body>
         <div id="main">
             <div id="stats-container">
+<<<<<<< HEAD
                 <div class="stats-container__item"><span>Totaal aantal verdient deze maand </span><p>€<?=returnGeldVerdientWeek()?></p>Voer winst in deze maand:<input name="winst_number" type="number"><button name="winst_submit">Bevestigen</button></div>
                 <div class="stats-container__item"><span>Totaal reserveringen die weg gaan vandaag</span><p><?= returnVerlatendeReserveringen() ?></p></div> 
                 <div class="stats-container__item"></div>
@@ -100,3 +122,13 @@
 
 
 
+=======
+                <div class="stats-container__item"></div>
+                <div class="stats-container__item"> </div> 
+                <div class="stats-container__item"> </div>        
+            </div>
+        </div>
+    </body>
+</htm>
+ 
+>>>>>>> 7dbae7f1ad79f8d8afc0199d40cda9e81fba4478
