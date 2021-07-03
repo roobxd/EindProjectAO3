@@ -6,9 +6,10 @@
 
             :root {
                 --accent-green: #72c975;
+                --accent-green-darker: #6bbb6e;
                 --main-dark: #444444;
                 --main-light: #ffffff;
-                --main-background: #e2e2e2;
+                --main-background: #e9e9e9;
                 --main-light-gray: #f3f3f3;
                 --accent-yellow: #F7EF99;
             }
@@ -31,7 +32,7 @@
             #nav-menu__logo{
                 width: 100%;
                 height: 5%;
-                background-color: var(--accent-green);
+                background-color: var(--accent-green-darker);
                 text-align: center;
                 display: table;
             }
@@ -41,9 +42,13 @@
                 vertical-align: middle;
                 color: var(--main-light);
                 font-weight: bold;
+                font-size: 24px;
             }
 
-            #nav-menu__redirect{margin-top: 50px;}
+            #nav-menu__redirect{
+                margin-top: 50px;
+                height: inherit;
+            }
             
             .nav-menu__redirect__item a:hover {background-color: rgba(76, 175, 80, 0.2);}
             .nav-menu__redirect__item a:hover .nav-menu__redirect__item__content{color: var(--accent-green);}
@@ -61,6 +66,24 @@
             }
 
             .nav-menu__redirect__item span {margin-left: 2em;}
+            .nav-menu__login__content span{margin-left: 2em;}
+
+            .nav-menu__login-button{
+           
+            }
+            .nav-menu__login-button a{
+                font-size: 1rem;
+                text-decoration: none; 
+                color: var(--main-dark); 
+                font-weight: bold;
+                display:block;
+                transition: background-color 0.2s;
+                padding: 30px;
+                background-color: inherit;
+                cursor: pointer;
+            }
+            .nav-menu__login-button a:hover{background-color: rgba(76, 175, 80, 0.2);}
+            .nav-menu__login-button a:hover .nav-menu__login__content{color: var(--accent-green);}
 
 
         </style>
@@ -94,6 +117,11 @@
                 <div class="nav-menu__redirect__item">
                     <a href="../stats/statistieken.php">
                         <div class="nav-menu__redirect__item__content"><i class="far fa-chart-bar"></i><span>Omzet en Statistieken</span></div>
+                    </a>
+                </div>
+                <div class="nav-menu__login-button">
+                    <a href="../../login.html">
+                        <div class="nav-menu__login__content"><i class="fas fa-sign-out-alt"></i><span>Uitloggen</span></div>
                     </a>
                 </div>
             </div>

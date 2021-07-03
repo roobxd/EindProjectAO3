@@ -1,6 +1,6 @@
 <?php
     require_once(__DIR__."/../../../assets/php/db/database_connectie.php");
-    require(__DIR__."/../../reservering/reservering_php/reservering_sql.php");
+    require_once(__DIR__."/../../reservering/reservering_php/reservering_sql.php");
 
     function returnActieveReserveringen(){
         $connection = OpenConnection();
@@ -30,11 +30,23 @@
         while ( $arr = $result->fetch_assoc() ){
             $price += (new Reservering($arr))->calculate_price(NULL);
         }
+        CloseConnection($connection);
         return $price;
     }
 
-    function returnGeldVerdientMaand(){
 
+
+    function returnWinst(){
+        $connection = OpenConnection();
+        $result = $connection->query("SELECT `winst` FROM `winst_archief`");
+
+        $winstArray = array();
+        
+        while($row = $result->fetch_array(MYSQLI_NUM)){
+            array_push($winstArray, $row[0]);
+        }
+        CloseConnection($connection);
+        return $winstArray;
     }
 
 
