@@ -51,7 +51,7 @@
 
             Volwassene
             <p><input required name="volwassene" type="number"></p>
-            Kinderen van 4 tot 12 jaar
+            Kinderen
             <p><input required name="kinderen4_12" type="number"></p>
 
             Huisdier?

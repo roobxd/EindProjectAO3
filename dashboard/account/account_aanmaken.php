@@ -13,30 +13,36 @@
         #main{
             width: auto;
             height: 100%;
+            margin-left: 15%;
             background-color: var(--main-background);
+            text-align: center;
         }
 
         #account-form{
+            display: inline-block;
             background-color: var(--main-light);
             box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
             border-radius: 15px;
-            margin: auto;
-            width: 60%;
-            height: 80%;
+            width: 65%;
+            margin: 2%;
+            padding: 15px;
         }
     </style>
 <head></head>
 <body>
     <div id="main">
-        <div id="account-form">
-            <form action="account_php/toevoegen.php" method="POST">
-                <input type="text" name="gebruikersnaam">
-                <input type="email" name="email">
-                <input type="password" name="wachtwoord">
-                <input type="number" name="rechten">
-                <input type="submit" name="toevoegen" value="Opslaan">
-            </form>
-        </div>
+        <form id="account-form" action="account_php/toevoegen.php" method="POST">
+            <h1>Account aanmaken</h1>
+            Gebruikersnaam
+            <p><input type="text" name="gebruikersnaam"></p>
+            Email
+            <p><input type="email" name="email"></p>
+            Wachtwoord
+            <p><input type="password" name="wachtwoord"></p>
+            Machtigingsniveau
+            <p><input type="number" name="rechten"></p>
+            <input type="submit" name="toevoegen" value="Opslaan">
+        </form>
     </div>
 </body>
 </html>

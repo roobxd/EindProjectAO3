@@ -17,7 +17,7 @@
             "verblijf" => $_POST["verblijf"],
             "auto" => (isset($_POST["auto"])) ? intval($_POST["auto"]) : 0
         );
-        if(checkBeschikbaar($add_reservering_array["plaatsnummer"], $add_reservering_array["begin_datum"], $add_reservering_array["eind_datum"])){
+        if(checkBeschikbaar($add_reservering_array["plaatsnummer"], $add_reservering_array["begin_datum"], $add_reservering_array["eind_datum"], NULL)){
             addReservering($add_reservering_array);
             header("Location: ../reserveringen.php");
         } else {

@@ -15,24 +15,19 @@
         #main{
             width: auto;
             height: 100%;
-            background-color: var(--main-background);
-        }
-
-        #account-container{
-            background-color: var(--main-background);
-            height: 70%;
-            max-width: 70%;
-            padding: 15px;
             margin-left: 15%;
+            background-color: var(--main-background);
+            text-align: center;
         }
 
         #account-form{
+            display: inline-block;
             background-color: var(--main-light);
             box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
             border-radius: 15px;
-            margin: auto;
-            width: 60%;
-            height: 80%;
+            width: 65%;
+            margin: 2%;
+            padding: 15px;
         }
 
     </style>
@@ -42,18 +37,17 @@
     </head>
     <body>
         <div id="main">
-            <div id="account-container">
-                <div id="account-form">
-                    <form action="account_php/aanpassen.php" method="POST">
-                        <input type="hidden" name="gebruiker_id" value=<?= $account->gebruiker_id ?>>
-                        <input type="text" name="gebruikersnaam" value=<?= $account->gebruikersnaam ?>>
-                        <input type="text" name="email" value= <?= $account->email ?>>
-                        <button name="password_reset" value=<?= $account->gebruiker_id ?>>Reset Wachtwoord</button>
-                        <input type="number" name="rechten" value= <?= $account->rechten ?>>
-                        <input type="submit" name="aanpassen" value="Opslaan">
-                    </form>
-                </div>
-            </div>
+            <form id="account-form" action="account_php/aanpassen.php" method="POST">
+                <h1>Account bewerken</h1>
+                <p><input type="hidden" name="gebruiker_id" value=<?= $account->gebruiker_id ?>></p>
+                Gebruikersnaam
+                <p><input type="text" name="gebruikersnaam" value=<?= $account->gebruikersnaam ?>></p>
+                Email
+                <p><input type="text" name="email" value= <?= $account->email ?>></p>
+                Rechten
+                <p><input type="number" name="rechten" value= <?= $account->rechten ?>></p>
+                <p><input type="submit" name="aanpassen" value="Opslaan"></p>
+            </form>
         </div>
     </body>
 </htm>

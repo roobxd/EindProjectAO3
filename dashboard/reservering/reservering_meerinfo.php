@@ -48,13 +48,13 @@
                 Plaatsnummer
                 <p><input type="number" name="plaatsnummer" value= <?= $reservering->plaatsnummer ?>></p>
                 Begin Datum
-                <p><input type="date" name="begin_datum" value= <?= date('Y-m-d\TH:i:s', strtotime($reservering->begin_datum)); ?>></p>
+                <p><input type="date" name="begin_datum" value= <?= date('Y-m-d', strtotime($reservering->begin_datum)); ?>></p>
                 Eind Datum
-                <p><input type="date" name="eind_datum" value= <?= date('Y-m-d\TH:i:s', strtotime($reservering->eind_datum)); ?>></p>
+                <p><input type="date" name="eind_datum" value= <?= date('Y-m-d', strtotime($reservering->eind_datum)); ?>></p>
 
                 Volwassene  
                 <p><input type="number" name="volwassene" value= <?= $reservering->volwassene ?>></p>
-                Kinderen van 4 tot 12 jaar
+                Kinderen
                 <p><input type="number" name="kinderen4_12" value= <?= $reservering->kinderen4_12 ?>></p>
 
                 Huisdier?

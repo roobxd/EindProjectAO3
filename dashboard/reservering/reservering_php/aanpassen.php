@@ -23,7 +23,7 @@
             "verblijf" => $_POST["verblijf"],
             "auto" => $auto_value
         );
-        if(checkBeschikbaar($edit_array["plaatsnummer"], $edit_array["begin_datum"], $edit_array["eind_datum"])){
+        if(checkBeschikbaar($edit_array["plaatsnummer"], $edit_array["begin_datum"], $edit_array["eind_datum"], $edit_array["reservering_id"])){
             editReservering($edit_array);
             header("Location: ../reserveringen.php");
         } else {

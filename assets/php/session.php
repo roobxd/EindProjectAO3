@@ -6,8 +6,10 @@
     }
 
     function stopSession(){
+        session_start();
+        unset($_SESSION["permission"]);
         session_destroy();
-        header("Location: ".__DIR__."/../../login.html");
+        header("Location: ../../login.html");
     }
 
     function checkPermission($level){

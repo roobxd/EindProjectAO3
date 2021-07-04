@@ -118,14 +118,6 @@
             return $price;
         }
     }
-
-    function updateWinst($maand, $prijs){
-        $connection = OpenConnection();
-
-        $prep_query = $connection->prepare("UPDATE ");
-
-        CloseConnection($connection);
-    }
     
     function return_fancy_name($key){
         $reservering_naam = array(
@@ -142,11 +134,18 @@
         return $reservering_naam[$key];
     }
 
-    function checkBeschikbaar($plaatsnummer, $begin_datum, $eind_datum){
+    function checkBeschikbaar($plaatsnummer, $begin_datum, $eind_datum, $reservering_id){
         $connection = OpenConnection();
-        $prep_query = $connection->prepare("SELECT * FROM `reserveringen` WHERE (? <= `reserveringen`.`eind_datum`) AND (? >= `reserveringen`.`begin_datum`) AND `reserveringen`.`plaatsnummer` = ?");
+        if(!is_null($reservering_id)){
+            $prep_query = $connection->prepare("SELECT * FROM `reserveringen` WHERE (? <= `reserveringen`.`eind_datum`) AND (? >= `reserveringen`.`begin_datum`) AND `reserveringen`.`plaatsnummer` = ? AND `reserveringen`.`reservering_id` != ?");
+            $prep_query->bind_param("ssii", $begin_datum, $eind_datum, $plaatsnummer, $reservering_id);
+        } else {
+            $prep_query = $connection->prepare("SELECT * FROM `reserveringen` WHERE (? <= `reserveringen`.`eind_datum`) AND (? >= `reserveringen`.`begin_datum`) AND `reserveringen`.`plaatsnummer` = ?");
+            $prep_query->bind_param("ssi", $begin_datum, $eind_datum, $plaatsnummer);
+        }
+        
 
-        $prep_query->bind_param("ssi", $begin_datum, $eind_datum, $plaatsnummer );
+        
         $prep_query->execute();
 
         
