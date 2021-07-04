@@ -6,17 +6,116 @@
 </head>
 <div id="register-div">
     <div id="register-form">
-        <form method="POST" action="assets/php/registreren.php">
-            <label for="user">Gebruikersnaam:</label>
-            <input name="user" type="text">
-            <label for="email">E-mail:</label>
-            <input name="email" type="text">
-            <label for="password">Wachtwoord:</label>
-            <input name="password" type="password">
-            <input name="submit" type="submit">
-            <a href="login.html">Klik hier om weer in te loggen</a>
-        </form>
+
     </div>
 </div>
+</html>
+
+<html>
+<head>
+    <title>La Rustique</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        
+        body {
+            background-color: #6AB187;
+            margin-top: 50px;
+        }
+
+        #login-form, #login-form *{
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        
+        #login-form{
+            overflow: hidden;
+            max-width: 350px;
+            margin: 0 auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.20);
+        }
+
+        #login-form__logo__container{
+            background-color: rgba(0,0,0,0.25);
+            font-weight: bold;
+            text-align: center;
+            padding: 25px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #login-form__logo__container span{
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        #login-form__content{
+            text-align: center;
+            padding: 25px;
+            background: #eeeeee;
+        }
+
+        #login-form__content__header{
+            padding: 15px;
+            text-align: center;
+        }
+        .login-form__input{
+            padding: 15px;
+            margin-bottom: 10px;
+            width: 100%;
+            border: 2px solid #dddddd;
+            outline: none;
+            border-radius: 5px;
+            background: #ffffff;
+            transition: border-color 0.2s;
+        }
+
+        .login-form__input:focus {
+            border-color: #6AB187;
+        }
+
+        .login-form__button{
+            padding: 15px;
+            font-weight: bold;
+            width: 100%;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #ffffff;
+            background: #6AB187;
+            transition: background-color 0.2s;
+            margin-bottom: 10px;
+        }
+
+        .login-form__button:hover{
+            background: #6ab188c9;
+        }
+
+        .login-form__link{
+            color: #6AB187;
+            font-size: 15px;
+        }
+
+
+    </style>
+</head>
+    <form method="POST" id="login-form" action="assets/php/registreren.php">
+        <div id="login-form__logo__container">
+            <span>La Rustique</span>
+        </div>
+        <div id="login-form__content">
+            <div id="login-form__content__header">
+                Registreren
+            </div>
+            <input placeholder="Gebruikersnaam" class="login-form__input" name="user" type="text">
+            <input placeholder="Email" class="login-form__input" name="email" type="text">
+            <input placeholder="Wachtwoord" class="login-form__input" name="password" type="password">
+            <input class="login-form__button" name="submit" type="submit">
+            <a href="login.html">Klik hier om weer in te loggen</a>
+        </div>
+    </form>
 </html>
 

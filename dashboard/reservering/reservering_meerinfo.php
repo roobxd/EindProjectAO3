@@ -1,7 +1,10 @@
 <?php
-    require_once(__DIR__."/../../assets/template/dashboard_template.html");
+
     require_once(__DIR__."/reservering_php/reservering_sql.php");
-    
+    if(checkPermission(1) == 0){
+        exit("Geen toegang");
+    };
+    require_once(__DIR__."/../../assets/template/dashboard_template.html");
     $reservering = selectReservering($_GET["reservering_id"]);
 
 ?> 
@@ -9,18 +12,20 @@
     <style>
         #main{
             width: auto;
-            height: 100%;
             margin-left: 15%;
+            height: 100%;
             background-color: var(--main-background);
+            text-align: center;
         }
 
-        #reserveringen-container{
-            background-color: var(--main-background);
-            height: 70%;
-            max-width: 70%;
+        #reservering-form{
+            display: inline-block;
+            background-color: var(--main-light);
+            box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
+            border-radius: 15px;
+            width: 65%;
+            margin: 2%;
             padding: 15px;
-            margin-left: 15%;
-
         }
 
     </style>
@@ -30,8 +35,8 @@
     </head>
     <body>
         <div id="main">
-            <div id="reserveringen-container">
-            <form action="reservering_php/aanpassen.php" method="POST">
+            <form id="reservering-form" action="reservering_php/aanpassen.php" method="POST">
+                <h1>Reservering Info</h1>
                 <input type="hidden" name="reservering_id" value=<?=$_GET["reservering_id"];?>>
                 Voornaam
                 <p><input type="text" name="voornaam" value= <?= $reservering->voornaam ?>></p>
@@ -43,9 +48,9 @@
                 Plaatsnummer
                 <p><input type="number" name="plaatsnummer" value= <?= $reservering->plaatsnummer ?>></p>
                 Begin Datum
-                <p><input type="date" name="begin_datum" value= <?= date('Y-m-d\TH:i:s', strtotime($reservering->begin_datum)); ?>>
+                <p><input type="date" name="begin_datum" value= <?= date('Y-m-d\TH:i:s', strtotime($reservering->begin_datum)); ?>></p>
                 Eind Datum
-                <input type="date" name="eind_datum" value= <?= date('Y-m-d\TH:i:s', strtotime($reservering->eind_datum)); ?>></p>
+                <p><input type="date" name="eind_datum" value= <?= date('Y-m-d\TH:i:s', strtotime($reservering->eind_datum)); ?>></p>
 
                 Volwassene  
                 <p><input type="number" name="volwassene" value= <?= $reservering->volwassene ?>></p>
@@ -75,7 +80,6 @@
                 <p><input type="checkbox" name="auto" value=<?=$reservering->auto ?> <?php if($reservering->auto == 1){echo "checked='checked'";}?>></p>
                 <p><input type="submit" name="aanpassen" value="Aanpassen"></p>
             </form>
-            </div>
         </div>
     </body>
 </htm>

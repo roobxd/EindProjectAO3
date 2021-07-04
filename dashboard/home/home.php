@@ -1,5 +1,8 @@
 <?php
-
+    require_once(__DIR__."/../../assets/php/session.php");
+    if(checkPermission(1) == 0){
+        exit("Geen toegang");
+    };
 ?>
 
 <html>
@@ -37,6 +40,10 @@
         .nav-menu__redirect__item a{
             text-decoration: none; 
             color: var(--main-dark); 
+        }
+
+        span{
+            margin-left: 1em;
         }
 
         .nav-menu__redirect__item a:hover .nav-menu__redirect__item__content{color: var(--accent-green);}

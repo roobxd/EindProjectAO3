@@ -32,6 +32,12 @@
             margin: 0 auto;
         }
 
+        #login-form__logo__container span{
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
         #login-form__content{
             text-align: center;
             padding: 25px;
@@ -85,18 +91,19 @@
 </head>
     <form method="POST" id="login-form" action="assets/php/login.php">
         <div id="login-form__logo__container">
-            Logo placeholder
+            <span>La Rustique</span>
         </div>
         <div id="login-form__content">
             <div id="login-form__content__header">
-                Login
+                Inloggen
             </div>
 
-            <input class="login-form__input" name="f_username" placeholder="Gebruikersnaam.." type="text">
-            <input class="login-form__input" name="f_password" placeholder="Wachtwoord.." type="password">
-            <input class="login-form__button" name="f_submit" value="Inloggen" type="submit">
+            <input class="login-form__input" name="username" placeholder="Gebruikersnaam.." type="text">
+            <input class="login-form__input" name="password" placeholder="Wachtwoord.." type="password">
+            <input class="login-form__button" name="submit" value="Inloggen" type="submit">
             <a class="login-form__link" href="registreren.html">Klik hier om te registreren..</a>
         </div>
     </form>
+
 </html>
 

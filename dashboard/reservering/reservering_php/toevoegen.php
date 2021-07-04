@@ -19,7 +19,6 @@
         );
         if(checkBeschikbaar($add_reservering_array["plaatsnummer"], $add_reservering_array["begin_datum"], $add_reservering_array["eind_datum"])){
             addReservering($add_reservering_array);
-            updateWinst()
             header("Location: ../reserveringen.php");
         } else {
             echo "Plek niet beschikbaar..";

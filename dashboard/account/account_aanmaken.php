@@ -1,6 +1,10 @@
 <?php
-    require_once(__DIR__."/../../assets/template/dashboard_template.html");
     require_once(__DIR__."/account_php/account_sql.php");
+    if(checkPermission(2) == 0){
+        exit("Geen toegang");
+    };
+    require_once(__DIR__."/../../assets/template/dashboard_template.html");
+
 ?>
 
 

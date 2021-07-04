@@ -1,5 +1,8 @@
 <?php
 	require_once(__DIR__."/reservering_php/reservering_sql.php");
+	if(checkPermission(1) == 0){
+        exit("Geen toegang");
+    };
 	$reservering = selectReservering($_GET["reservering_id"]);
 ?>
 
@@ -41,13 +44,14 @@
 						<p>La Rustique</p>
 						<p class="details">63420 Ardes<br>
 						Tel: 04-76372000<br>
-						info@larustique.com</p>
+						info@larustique.com</p><br>
 					</td>
                 </tr>
 				<tr>
 					<td colspan=100%>
-						<p><?= $reservering->voornaam ?> <?= $reservering->tussenvoegsel ?> <?= $reservering->achternaam ?></p>
-						<p class="details">Begin Datum: <?= $reservering->begin_datum ?><br>
+						
+						<p class="details"><?= $reservering->voornaam ?> <?= $reservering->tussenvoegsel ?> <?= $reservering->achternaam ?><br>
+						Begin Datum: <?= $reservering->begin_datum ?><br>
 						Eind Datum: <?= $reservering->eind_datum ?></p>
 						<hr>
 					</td>
@@ -64,11 +68,7 @@
 					<th>Beschrijving</th><th>Quantiteit</th><th style="float: right;">Prijs</th>
 					<?php 
 						foreach($reservering->return_factuur() as $r){
-<<<<<<< HEAD
-							echo "<tr><td>".return_fancy_name($r)."</td><td>".($r == "huisdier")."</td><td>€".$reservering->calculate_price($r)."</td></tr>";
-=======
-							echo "<tr><td>".$reservering->return_fancy_name($r)."</td><td>".($r == "")."</td><td>€".$reservering->calculate_price($r)."</td></tr>";
->>>>>>> 7dbae7f1ad79f8d8afc0199d40cda9e81fba4478
+							echo "<tr><td>".return_fancy_name($r)."</td><td>".$reservering->$r."</td><td>€".$reservering->calculate_price($r)."</td></tr>";
 						}
 						echo "<tr><td colspan='100%'><hr></td></tr>";
 						echo "<tr><td>Totaal Prijs:</td><td></td><td>€".$reservering->calculate_price(NULL)."</td></tr>";

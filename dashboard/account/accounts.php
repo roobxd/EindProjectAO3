@@ -1,6 +1,11 @@
 <?php
-    require_once(__DIR__."/../../assets/template/dashboard_template.html");
     require_once(__DIR__."/account_php/account_sql.php");
+    if(checkPermission(2) == 0){
+        exit("Geen toegang");
+    };
+    require_once(__DIR__."/../../assets/template/dashboard_template.html");
+
+
 ?>
 
 <html>
@@ -8,6 +13,7 @@
         #main{
             width: auto;
             height: 100%;
+            margin-left: 15%;
             background-color: var(--main-background);
         }
 
@@ -17,8 +23,6 @@
             max-width: 70%;
             padding: 15px;
             margin-left: 15%;
-            text-align: center;
-            justify-content: center;
 
         }
 
@@ -28,7 +32,6 @@
             min-width: inherit;
             max-height: inherit;
             box-sizing: border-box;
-            margin: 0 auto;
             background-color: var(--main-light);
             box-shadow: 3px 3px 4px rgba(0,0,0,0.4);
             border-radius: 15px;
@@ -113,9 +116,9 @@
             <div id="account-container">
                 <div id="account-container__options">
                     <div id="account-container__options__content">
-                        <input id="account-filter" type="text">
-                        <button id="aanmaken">Aanmaken</button>
-                        <button id="bulk_verwijderen">Verwijderen</button>
+                        <input id="account-filter" placeholder="Zoeken.." type="text">
+                        <button id="aanmaken"><i class="far fa-plus-square"></i></button>
+                        <button id="bulk_verwijderen"><i class='fas fa-trash'></i></button>
                     </div>
                 </div>
                 <div id="account-container__account-table">
@@ -129,7 +132,7 @@
                                     echo "<td>".$result."</td>";
                                 }
                                 echo "<td>**********</td>";
-                                echo "<td> <button class='bewerken' value=".$account->gebruiker_id.">Bewerken</button> <button class='verwijderen' value=".$account->gebruiker_id.">Verwijderen</button>";
+                                echo "<td> <button class='bewerken' value=".$account->gebruiker_id."><i class='far fa-edit'></i></button> <button class='verwijderen' value=".$account->gebruiker_id."><i class='fas fa-trash'></i></button>";
                                 echo "</tr>";
                             }
                         ?>

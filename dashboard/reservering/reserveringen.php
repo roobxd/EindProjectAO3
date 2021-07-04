@@ -1,7 +1,12 @@
 
 <?php
-    require_once(__DIR__."/../../assets/template/dashboard_template.html");
     require_once(__DIR__."/reservering_php/reservering_sql.php");
+    if(checkPermission(1) == 0){
+        exit("Geen toegang");
+    };
+    require_once(__DIR__."/../../assets/template/dashboard_template.html");
+
+
 ?> 
 <html>
     <style>
@@ -119,9 +124,9 @@
             <div id="reserveringen-container">
                 <div id="reserveringen-container__options">
                     <div id="reserveringen-container__options__content">
-                        <input id="reservering-filter" type="text">
-                        <button id="aanmaken">Aanmaken</button>
-                        <button id="bulk_verwijderen">Verwijderen</button>
+                        <input id="reservering-filter" placeholder="Zoeken.." type="text">
+                        <button id="aanmaken"><i class="far fa-plus-square"></i></button>
+                        <button id="bulk_verwijderen"><i class='fas fa-trash'></i></button>
                     </div>
                 </div>
                 <div id="reserveringen-container__reserveringen-table">
@@ -137,7 +142,7 @@
                            
                                 }
                                 echo "<td>€". $reservering->calculate_price(NULL) ."</td>";
-                                echo "<td><button value=".$reservering->reservering_id." class='meer_info'>Meer Info / Aanpassen</button><button value=".$reservering->reservering_id." class='verwijderen'>Verwijderen</button><button class='factuur' value=".$reservering->reservering_id.">Factuur</button></td>";
+                                echo "<td><button value=".$reservering->reservering_id." class='meer_info'><i class='fas fa-info'></i></button><button value=".$reservering->reservering_id." class='verwijderen'><i class='fas fa-trash'></i></button><button class='factuur' value=".$reservering->reservering_id."><i class='fas fa-receipt'></i></button></td>";
                                 echo "</tr>";
                             }
                         ?>

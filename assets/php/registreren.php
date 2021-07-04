@@ -1,5 +1,5 @@
 <?php
-    require("db/database_connectie.php");
+    require_once("db/database_connectie.php");
     if(isset($_POST["submit"])){
         if(RegisterAccount($_POST["user"], $_POST["email"], $_POST["password"])){
             header("Location: ../../login.html");
